@@ -1,0 +1,255 @@
+{
+  "character":{
+    "name":"Test Hero",
+    "level": 1,
+    "current_xp": 0,
+    "race":"Mountain Dwarf",
+    "class": "Warrior",
+    "background": "Folk Hero",
+    "wealth": 1000,
+    "carrying_capacity":"{{15*strength}}",
+    "height": "6ft",
+    "weight": 185,
+    "darkvision": true 60,
+    "armor_class":{
+      "armor_equipped":true,
+      "shield_equipped":true,
+      "armor":{
+        "name":"scale_mail",
+        "armor_type":"medium_armor",
+        "base_ac":14,
+        "add_dex_mod": true,
+        "armor_dex_cap":2,
+        "strength_requirement": 0,
+        "stealth_disadvantage":true,
+        "material":"metal",
+        "cost":"{{50gp}}",
+        "weight":45
+      },
+      "add_ability_modifiers":{
+        "strength":false,
+        "dexterity":false,
+        "constitution":false,
+        "intelligence":false,
+        "wisdom":false,
+        "charisma":false,
+      },
+      "misc_modifiers":0
+    },
+    "initiative":{
+      "roll":"{{1d20}}",
+      "add_dex_mod":true,
+      "misc_modifiers":0
+    },
+    "speed":30,
+    "current_hp":13,
+    "max_hp":13,
+    "temp_hp":0,
+    "hit_dice":"{{1d10}}",
+    "proficiency_bonus": 2,
+    "equipped_weapons":{
+      "right_hand":{
+        "name":"Bloodletter",
+        "weapon_type":"longsword",
+        "weapon_restrictions":"{{martial || melee || longsword}}",
+        "damage":"{{1d8}}",
+        "damage_type":"slashing",
+        "ammunition":false,
+        "finesse":false,
+        "heavy":false,
+        "light":false,
+        "loading":false,
+        "range":false,
+        "reach":false,
+        "silvered":false,
+        "special":false,
+        "thrown":false,
+        "two-handed":false,
+        "versatile":true,
+        "weight": 3,
+        "cost": "{{15gp}}"
+      },
+      "left_hand":"{{holding shield}}"
+    },
+    "ability_scores":{
+      "strength": 15,
+      "dexterity": 13,
+      "constitution": 15,
+      "intelligence": 8,
+      "wisdom": 9,
+      "charisma": 12,
+    },
+    //enumerated 1= basic 2=proficient 3=expert 0=unusable
+    "saving_throws":{
+      "strength":2,
+      "dexterity":1,
+      "constitution":2,
+      "intelligence":1,
+      "wisdom":1,
+      "charisma":1,
+    },
+    "skill_proficiencies":{
+      "strength_skills":{
+        "athletics": 2
+      },
+      "dexterity_skills":{
+        "acrobatics":1,
+        "sleight_of_hand":1,
+        "stealth":1
+      },
+      "intelligence_skills":{
+        "arcana":1,
+        "history":1,
+        "investigation":1,
+        "nature":1,
+        "religion":1
+      },
+      "wisdom_skills":{
+        "animal_handling":2,
+        "insight":1,
+        "medicine":1,
+        "perception":1,
+        "survival":2
+      },
+      "charisma_skills":{
+        "deception":1,
+        "indimidation":2,
+        "performance":1,
+        "persuasion":1
+      }
+    },
+    "armor_proficiencies":{
+      "light_armor":true,
+      "medium_armor":true,
+      "heavy_armor":true,
+      "shield":true
+    },
+    "weapon_proficiencies":{
+      "simple_melee_weapons":{
+        "club":true,
+        "dagger":true,
+        "greatclub":true,
+        "handaxe":true,
+        "javelin":true,
+        "light_hammer":true,
+        "mace":true,
+        "quarterstaff":true,
+        "sickle":true,
+        "spear":true,
+      },
+      "simple_ranged_weapons":{
+        "light_crossbow":true,
+        "dart":true,
+        "shortbow":true,
+        "sling":true
+      },
+      "martial_melee_weapons":{
+        "battleaxe":true,
+        "flail":true,
+        "glaive":true,
+        "greataxe":true,
+        "greatsword":true,
+        "halberd":true,
+        "lance":true,
+        "longsword":true,
+        "maul":true,
+        "morningstar":true,
+        "pike":true,
+        "rapier":true,
+        "scimitar":true,
+        "shortsword":true,
+        "trident":true,
+        "war_pick":true,
+        "whip":true
+      },
+      "martial_ranged_weapons":{
+        "blowgun":true,
+        "hand_crossbow":true,
+        "heavy_crossbow":true,
+        "longbow":true,
+        "net":true
+      }
+    },
+    "tool_proficiencies":{
+      "artisans_tools":{
+        "alchemists_supplies":false,
+        "brewers_supplies":true,
+        "calligraphers_supplies":false,
+        "carpenters_tools":false,
+        "cartographers_tools":false,
+        "cobblers_tools":false,
+        "cooks_utensils":false,
+        "glassblowers_tools":false,
+        "jewelers_tools":false,
+        "leatherworkers_tools":false,
+        "masons_tools":false,
+        "painters_supplies":false,
+        "potters_tools":false,
+        "smiths_tools":true,
+        "tinkers_tools":false,
+        "weavers_tools":false,
+        "woodcarvers_tools":false
+      },
+      "disguise_kit":false,
+      "forgery_kit":false,
+      "gaming_set":{
+        "dice_set":false,
+        "dragonchess_set":false,
+        "playing_card_set":false,
+        "three_dragon_ante_set":false
+      },
+      "herbalism_kit":false,
+      "musical_instrument":{
+        "bagpipes":false,
+        "drum":false,
+        "dulcimer":false,
+        "flute":false,
+        "lute":false,
+        "lyre":false,
+        "horn":false,
+        "pan_flute":false,
+        "shawm":false,
+        "viol":false
+      },
+      "navigators_tools":false,
+      "poisoners_kit":false,
+      "thieves_tools":false,
+      "vehicles":false
+    },
+    "languages":{
+      "standard_languages":{
+        "common":true,
+        "dwarvish":false,
+        "elvish":false,
+        "giant":false,
+        "gnomish":false,
+        "goblin":false,
+        "halfling":true,
+        "orc":false
+      },
+      "exotic_languages":{
+        "abyssal":false,
+        "celestial":false,
+        "draconic":false,
+        "deep_speech":false,
+        "infernal":false,
+        "primordial":false,
+        "sylvan":false,
+        "undercommon":false
+      }
+    },
+    "characteristics":{
+      "personality_trait_1":"inhereted from background",
+      "personality_trait_2":"inhereted from background",
+      "ideal":"inhereted from background",
+      "bond":"inhereted from background",
+      "flaw":"inhereted from background"
+    },
+    "equipment":{
+      //contents of inventory
+    },
+    "feats":{
+      //combination of feats from race, class, background, and leveling.
+    }
+  }
+}

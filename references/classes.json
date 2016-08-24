@@ -1,0 +1,29 @@
+{
+  "class":{
+    "barbarian": {
+      "name":"Barbarian",
+      "hit_dice":"1d12",//gain one per level
+      //starting hp is second number in hit_dice plus constitution mod
+      //hp per level is half that number plus one plus constitution mod
+      "armor_proficiency":{
+        "light_armor": true,
+        "medium_armor": true,
+        "shields": true,
+      },
+      "weapon_proficiency":{
+        "simple_weapons": true,
+        "martial_weapons": true
+      },
+      "tool_proficiency": null,
+      "saving_throw_proficiency":{
+        "strength": true,
+        "constitution":true
+      },
+      "skill_proficiency": {
+        
+      }
+
+
+    }
+  }
+}

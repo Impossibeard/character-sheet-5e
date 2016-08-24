@@ -1,0 +1,692 @@
+{
+  race: "dwarf",
+  class: "cleric",
+  tool_proficiencies: {
+    smith_tools: true
+  },
+  languages: {
+
+  },
+  abilities: {
+    strength: 15,
+    dex: 10
+  },
+  conditions: {
+
+  },
+  level: 3,
+  xp: 400
+}
+
+
+{
+  "dwarf": {
+    "name":"Dwarf",
+    "size":"Medium",
+    "speed": 30,
+    "darkvision": true 60,
+    "ability_score_increase": {
+      "strength":0,
+      "dexterity":0,
+      "constitution":2,
+      "wisdom":0,
+      "intelligence":0,
+      "charisma":0,
+    },
+    "languages":{
+      "common_language": true,
+      "dwarvish": true
+    },
+    "available_tool_proficiencies": {
+      //Player chooses one of the following
+      "smith_tools": true,
+      "brewer_supplies": true,
+      "mason_tools": true
+    },
+    "racial_features": {
+      "dwarven_resilience": {
+        //advantage on saving throws
+        "condition_resistance":"poisoned",
+        //half damage from this damage type
+        "damage_resistance":"poison"
+      },
+      "dwarven_combat_training": {
+        "weapon_proficiency":{
+          "battleaxe":true,
+          "handaxe":true,
+          "light_hammer":true,
+          "warhammer":true
+        }
+      },
+      "stonecutting":{
+        "history_check": //double proficiency bonus if for stonework
+      }
+    },
+    "subrace": {
+      //Player must choose one. Abilities stack w/main race
+      "hill_dwarf":{
+        "name":"Hill Dwarf",
+        "ability_score_increase": {
+          "strength":0,
+          "dexterity":0,
+          "constitution":0,
+          "wisdom":1,
+          "intelligence":0,
+          "charisma":0,
+        },
+        "subracial_features": {
+          "dwarven_toughness":{
+            "modifies": "hp",
+            "modifier": 1,
+
+            "max_hp_increase": 1 //plus one per level,
+            "base_hp_increase": 1 //plus one
+          }
+        },
+        "description":"As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience."
+      },
+      "mountain_dwarf": {
+        "name":"Mountain Dwarf",
+        "ability_score_increase": {
+          "strength":2,
+          "dexterity":0,
+          "constitution":0,
+          "wisdom":0,
+          "intelligence":0,
+          "charisma":0,
+        },
+        "subracial_features": {
+          "dwarven_armor_training":{
+            "armor_proficiency":{
+              "light_armor": true,
+              "medium_armor": true
+            }
+          }
+        },
+        "description":"As a mountain dwarf, you're strong and hardy, accustomed to a difficult life in rugged terrain."
+      }
+    }
+  },
+  "Elf":{
+    "name":"Elf",
+    "size":"Medium",
+    "speed": 30,
+    "darkvision": true,
+    "ability_score_increase": {
+      "strength":0,
+      "dexterity":2,
+      "constitution":0,
+      "wisdom":0,
+      "intelligence":0,
+      "charisma":0,
+    },
+    "languages":{
+      "common_language": true,
+      "elvish": true
+    },
+    "racial_features": {
+      "keen_senses": {
+        "skill_proficiency":{
+          "perception": "proficient"
+        }
+      },
+      "fey_ancestry": {
+        //advantage on saving throws
+        "condition_resistance":"charmed",
+        "condition_immunity":"magical_sleep"
+      },
+      //don't need sleep, only need 4hr of meditating a day
+      "trance": true
+    },
+    "subrace": {
+      //Player must choose one. Abilities stack w/main race
+      "high_elf":{
+        "name":"High Elf",
+        "ability_score_increase": {
+          "strength":0,
+          "dexterity":0,
+          "constitution":0,
+          "wisdom":0,
+          "intelligence":1,
+          "charisma":0,
+        },
+        "subracial_features": {
+          "elf_weapon_training": {
+            "weapon_proficiency":{
+              "longsword":true,
+              "shortsword":true,
+              "shortbow":true,
+              "longbow":true
+            }
+          },
+          //choose one cantrip from wizard spell list. Spellcasting ability is Intelligence.
+          "cantrip": {
+            "spell": "wizard cantrip"
+          },
+          //choose one extra language to know
+          "extra_language": {
+            "languages": "?"
+          }
+        },
+        "description":"As a high elf, you have a keen mind and a mastery of at least the basics of magic."
+      },
+      "wood_elf": {
+        "name": "Wood Elf",
+        "ability_score_increase": {
+          "strength":0,
+          "dexterity":0,
+          "constitution":0,
+          "wisdom":1,
+          "intelligence":0,
+          "charisma":0,
+        },
+        "subracial_features": {
+          "elf_weapon_training": {
+            "weapon_proficiency":{
+              "longsword":true,
+              "shortsword":true,
+              "shortbow":true,
+              "longbow":true
+            }
+          },
+          "fleet_of_foot": {
+            "speed":35
+          },
+          //can attempt to hide when only lightly obscured
+          "mask_of_the_wild": {
+            "hide": "lightly obscured"
+          }
+        },
+        "description":"As a wood elf, you have keen senses and intuition, and your fleet feet carry you quickly and slealthily through your native forests."
+      },
+      "dark_elf": {
+        "name":"Dark Elf",
+        "ability_score_increase": {
+          "strength":0,
+          "dexterity":0,
+          "constitution":0,
+          "wisdom":0,
+          "intelligence":0,
+          "charisma":1,
+        },
+        "subracial_features":{
+          //superior darkvision
+          "darkvision":true 120,
+          "sunlight_sensitivity":{
+            "attack_disadvantage": "sunlight",
+            "perception_disadvantage": "sunlight"
+          },
+          "drow_magic":{
+            minimum_level: 4,
+            "racial_cantrip":{
+              "name": "Dancing Lights",
+              "level": "Cantrip",
+              "school": "Evocation",
+              "casting_time": "action",
+              "range": "120ft",
+              "verbal": true,
+              "somatic": true,
+              "material": "a bit of phosphorous, or wychwood, or a glow worm",
+              "duration": "up to 1min",
+              "concentration": true,
+              "damage": null,
+              "damage_type": null,
+              "description": "You create up to four torch-sized lights within range, making them appear as torches, lanterns, or glowing orbs that hover in the air for the duration. You can also combine the four Iights into one glowing vaguely humanoid form of Medium size. Whichever form you choose, each light sheds dim light in a 10-foot radius. As a bonus action on your turn, you can move the lights up to 60 feet to a new spot within range. A light must be within 20 feet of another light created by this spell, and a light winks out if it exceeds the spell's range.",
+              //overrides normal spellcasting ability
+              "spellcasting_ability": "Charisma"
+            }
+            //at third level gain 'Faerie Fire' once a day
+            //at fifth level gain 'Darkness' once a day
+          },
+          "drow_weapon_training": {
+            "weapon_proficiency":{
+              "rapier":true,
+              "shortsword":true,
+              "hand_crossbow":true,
+            }
+          }
+        },
+        "description":"Descended from an earlier subrace of dark-skinned elves, the Drow were banished from the surface world for following the goddess Lolth down the path to evil and corruption."
+      }
+    }
+  },
+  "halfling": {
+    "name":"Halfling",
+    "size":"Small",
+    "speed": 25,
+    "darkvision": false,
+    "ability_score_increase": {
+      "strength":0,
+      "dexterity":2,
+      "constitution":0,
+      "wisdom":0,
+      "intelligence":0,
+      "charisma":0,
+    },
+    "languages":{
+      "common_language": true,
+      "halfling": true
+    },
+    "racial_features": {
+      "lucky": {
+        //reroll a 1 on attack, ability checks, or saving throws
+      },
+      "brave": {
+        "condition_resistance": "frightened"
+      },
+      "halfling_nimbleness":{
+        //can move through the space of any creature that is 1 size larger than yours.
+      }
+    },
+    "subrace": {
+      //Player must choose one. Abilities stack w/main race
+      "lightfoot_halfling":{
+        "name":"Lightfoot Halfling",
+        "ability_score_increase": {
+          "strength":0,
+          "dexterity":0,
+          "constitution":0,
+          "wisdom":0,
+          "intelligence":0,
+          "charisma":1,
+        },
+        "subracial_features": {
+          "naturally_stealthy":{
+            //can attempt to hide even when obscured only by a creature that is at least 1 size larger
+          }
+        },
+        "description":"As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You're inclined to be affable and get along well with others."
+      },
+      "stout_halfling": {
+        "name":"Stout Halfling",
+        "ability_score_increase": {
+          "strength":0,
+          "dexterity":0,
+          "constitution":1,
+          "wisdom":0,
+          "intelligence":0,
+          "charisma":0,
+        },
+        "subracial_features": {
+          "stout_resilience":{
+            "condition_resistance":"poisoned",
+            "damage_resistance":"poison"
+          }
+        },
+        "description":"As a stout halfling. you're hardier than average and have some resistance to poison. Some say that stouts have dwarven blood."
+      }
+    }
+  },
+  "Human": {
+    "name":"Human",
+    "size":"Medium",
+    "speed": 30,
+    "darkvision": false,
+    "ability_score_increase": {
+      "strength":1,
+      "dexterity":1,
+      "constitution":1,
+      "wisdom":1,
+      "intelligence":1,
+      "charisma":1,
+    },
+    "languages":{
+      "common_language": true,
+      //get a second language of choice
+    }
+  },
+  "dragonborn": {
+    "name":"Dragonborn",
+    "size":"Medium",
+    "speed": 30,
+    "darkvision": false,
+    "ability_score_increase": {
+      "strength":2,
+      "dexterity":0,
+      "constitution":0,
+      "wisdom":0,
+      "intelligence":0,
+      "charisma":1,
+    },
+    "languages":{
+      "common_language": true,
+      "draconic": true
+    },
+    "racial_features": {
+      "draconic_ancestry": {
+        //choose one
+        //breath weapon can be used once per rest.
+        //opponent makes a save for half damage
+        //damage scales from 2d6 to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level
+        "black_dragon":{
+          "breath_weapon":{
+            "area_of_effect":"5ft x 30ft line",
+            "saving_throw": "dexterity",
+            "damage_type": "acid",
+            "damage": "2d6" //scales
+          },
+          "damage_resistance":"acid"
+        },
+        "blue_dragon":{
+          "breath_weapon":{
+            "area_of_effect":"5ft x 30ft line",
+            "saving_throw": "dexterity",
+            "damage_type": "lightning",
+            "damage": "2d6" //scales
+          },
+          "damage_resistance":"lightning"
+        },
+        "brass_dragon":{
+          "breath_weapon":{
+            "area_of_effect":"5ft x 30ft line",
+            "saving_throw": "dexterity",
+            "damage_type": "fire",
+            "damage": "2d6" //scales
+          },
+          "damage_resistance":"fire"
+        },
+        "bronze_dragon":{
+          "breath_weapon":{
+            "area_of_effect":"5ft x 30ft line",
+            "saving_throw": "dexterity",
+            "damage_type": "lightning",
+            "damage": "2d6" //scales
+          },
+          "damage_resistance":"lightning"
+        },
+        "copper_dragon":{
+          "breath_weapon":{
+            "area_of_effect":"5ft x 30ft line",
+            "saving_throw": "dexterity",
+            "damage_type": "acid",
+            "damage": "2d6" //scales
+          },
+          "damage_resistance":"acid"
+        },
+        "gold_dragon":{
+          "breath_weapon":{
+            "area_of_effect":"15ft cone",
+            "saving_throw": "dexterity",
+            "damage_type": "fire",
+            "damage": "2d6" //scales
+          },
+          "damage_resistance":"fire"
+        },
+        "green_dragon":{
+          "breath_weapon":{
+            "area_of_effect":"15ft cone",
+            "saving_throw": "constitution",
+            "damage_type": "poison",
+            "damage": "2d6" //scales
+          },
+          "damage_resistance":"poison"
+        },
+        "red_dragon":{
+          "breath_weapon":{
+            "area_of_effect":"15ft cone",
+            "saving_throw": "dexterity",
+            "damage_type": "fire",
+            "damage": "2d6" //scales
+          },
+          "damage_resistance":"fire"
+        },
+        "silver_dragon":{
+          "breath_weapon":{
+            "area_of_effect":"15ft cone",
+            "saving_throw": "constitution",
+            "damage_type": "cold",
+            "damage": "2d6" //scales
+          },
+          "damage_resistance":"cold"
+        },
+        "white_dragon":{
+          "breath_weapon":{
+            "area_of_effect":"15ft cone",
+            "saving_throw": "constitution",
+            "damage_type": "cold",
+            "damage": "2d6" //scales
+          },
+          "damage_resistance":"cold"
+        },
+      },
+    },
+    "description":"Your draconic heritage manifests in a variety of traits you share with other dragonborn."
+  },
+  "gnome": {
+    "name":"Gnome",
+    "size":"Small",
+    "speed": 25,
+    "darkvision": true 60,
+    "ability_score_increase": {
+      "strength":0,
+      "dexterity":0,
+      "constitution":0,
+      "wisdom":0,
+      "intelligence":2,
+      "charisma":0,
+    },
+    "languages":{
+      "common_language": true,
+      "gnomish": true
+    },
+    "racial_features": {
+      "gnome_cunning": {
+        //advantage on Intelligence, Wisdom, Charisma saving throws vs. magic
+        "condition_resistance":"magic",
+      },
+    },
+    "subrace": {
+      //Player must choose one. Abilities stack w/main race
+      "forest_gnome":{
+        "name":"Forest Gnome",
+        "ability_score_increase": {
+          "strength":0,
+          "dexterity":1,
+          "constitution":0,
+          "wisdom":0,
+          "intelligence":0,
+          "charisma":0,
+        },
+        "subracial_features": {
+          "natural_illusionist":{
+            "racial_cantrip":{
+              "name": "Minor Illusion",
+              "level": "Cantrip",
+              "school": "Illusion",
+              "casting_time": "action",
+              "range": "30 feet",
+              "verbal": false,
+              "somatic": true,
+              "material": "a bit of fleece",
+              "duration": "1 minute",
+              "concentration": true,
+              "damage": null,
+              "damage_type": null,
+              "description": "You create a sound or an image of an object within range that lasts for the duration. The illusion also ends if you dismiss it as an action or cast the spell again.
+
+              If you create a sound, its volume can range from a whisper to a scream. It can be your voice, someone else's voice, a lion's roar, a beating of drums, or any other sound you choose. The sound continues unabated throughout the duration or you can make discrete sounds at different times before the spell ends.
+
+              If you create an image of an object—such as a chair, muddy footprints, or a small chest—it must be no larger than a 5-foot cube. The image can't create sound, light, smell or any other sensory effect. Physical interaction with the object reveals it to be an illusion, because things can pass through it.
+
+              If a creature uses its action to examine the sound or image, the creature can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell DC. If the creature discerns the illusion for what it is, the illusion becomes faint to the creature.",
+              //overrides normal spellcasting ability
+              "spellcasting_ability": "Intelligence"
+            }
+          },
+          "speak_with_small_beasts": "Through sounds and
+          gestures, you can communicate simple ideas with Small or smaller beasts."
+        },
+        "description":"As a forest gnome, you have a natural knack for illusion and inherent quickness and stealth."
+      },
+      "rock_gnome": {
+        "name":"Rock Gnome",
+        "ability_score_increase": {
+          "strength":0,
+          "dexterity":0,
+          "constitution":1,
+          "wisdom":0,
+          "intelligence":0,
+          "charisma":0,
+        },
+        "subracial_features": {
+          "stonecutting":{
+            "history_check": //double proficiency bonus if for magic items, alchemical objects, or technological devices.
+          },
+          "tinker":{
+            "tool_proficiency": {
+              "tinker_tools":true
+            },
+            "build_clockwork_device": {
+              "build_time": "1hr",
+              "cost": "10g",
+              "active_devices": 0,
+              "max_active_devices": 3,
+              "clockwork_device":{
+                "duration": "24hr",
+                "repair_time": "1hr", //resets duration
+                "armor_class": 5,
+                "max_hp":1,
+                "temp_hp":0,
+                "current_hp":1,
+                "dismantle": "action",
+                "construct": {
+                  "clockwork_toy": {
+                    "description":"moves 5 feet on each of your turns in a random direction and makes sounds of its respective design"
+                  },
+                  "fire_starter": {
+                    "description":"produces a miniature flame which can be used to light a candle, torch, or campfire",
+                    "use": "action"
+                  },
+                  "music_box": {
+                    "description": "when opened, plays a single song at moderate volume until teh song ends or the box is shut"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description":"As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes."
+      }
+    }
+  },
+  "half_elf": {
+    "name":"Half-Elf",
+    "size":"Medium",
+    "speed": 30,
+    "darkvision": true 60,
+    "ability_score_increase": {
+      //choose two other ability scores to get +1
+      "strength":0,
+      "dexterity":0,
+      "constitution":0,
+      "wisdom":0,
+      "intelligence":0,
+      "charisma":2,
+    },
+    "languages":{
+      //choose 3rd language of choice
+      "common_language": true,
+      "elvish": true
+    },
+    "racial_features": {
+      "skill_versatility": {
+        "skill_proficiencies":{
+          //two skills of choice
+        }
+      },
+      "fey_ancestry": {
+        "condition_resistance":"charmed",
+        "condition_immunity":"magical_sleep"
+      }
+    },
+    "description":"Your half-elf character has some qualities in common with elves and some that are unique to half-elves."
+  },
+  "half_orc": {
+    "name":"Half-Orc",
+    "size":"Medium",
+    "speed": 30,
+    "darkvision": true 60,
+    "ability_score_increase": {
+      "strength":2,
+      "dexterity":0,
+      "constitution":1,
+      "wisdom":0,
+      "intelligence":0,
+      "charisma":0,
+    },
+    "languages":{
+      "common_language": true,
+      "orcish": true
+    },
+    "racial_features": {
+      "menacing": {
+        "skill_proficiency":{
+          "intimidation": "proficient"
+        }
+      },
+      "relentless_endurance": {
+        //when reduced to 0 hp, reduced to 1 instead.
+        //(unless killed outright)
+        "max_charges": 1,
+        "current_charges":0,
+        "recharge":"long rest",
+      },
+      "savage_attacks": {
+        //if score a critical hit on attack, reroll one attack die and add that damage
+      }
+    },
+    "description":"Your half-orc character has certain traits deriving from your orc ancestry."
+  },
+  "tiefling": {
+    "name":"Tiefling",
+    "size":"Medium",
+    "speed": 30,
+    "darkvision": true 60,
+    "ability_score_increase": {
+      "strength":0,
+      "dexterity":0,
+      "constitution":0,
+      "wisdom":0,
+      "intelligence":1,
+      "charisma":2,
+    },
+    "languages":{
+      "common_language": true,
+      "infernal": true
+    },
+    "racial_features": {
+      "hellish_resistance": {
+        "damage_resistance":"fire"
+      },
+      "infernal_legacy":{
+        "racial_cantrip":{
+          "name": "Thaumaturgy",
+          "level": "Cantrip",
+          "school": "Transmutation",
+          "casting_time": "action",
+          "range": "30ft",
+          "verbal": true,
+          "somatic": false,
+          "material": null,
+          "duration": "up to 1min",
+          "concentration": true,
+          "damage": null,
+          "damage_type": null,
+          "description": "You manifest a minor wonder, a sign of supernatural power, within range. You create one of the following magical effects within range:
+
+          1.Your voice booms up to three times as loud as normal for 1 minute.
+          2.You cause flames to flicker, brighten, dim, or change color for 1 minute.
+          3.You cause harmless tremors in the ground for 1 minute.
+          4.You create an instantaneous sound that originates from a point of your choice within range, such as a rumble of thunder, the cry of a raven, or ominous whispers.
+          5.You instantaneously cause an unlocked door or window to fly open or slam shut.
+          6.You alter the appearance of your eyes for 1 minute. If you cast this spell multiple times, you can have up to three of its 1 minute effects active at a time, and you can dismiss such an effect as an action",
+          //overrides normal spellcasting ability
+          "spellcasting_ability": "Charisma"
+        }
+        //at third level gain second level 'Hellish Rebuke' once a day
+        //at fifth level gain 'Darkness' once a day
+      },
+    },
+    "description":"Tieflings share certain racial traits as a result of their infernal descent."
+  },
+}
