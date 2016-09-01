@@ -1,3 +1,5 @@
 class Race < ApplicationRecord
-  belongs_to :character
+
+  enum size: [:tiny, :small, :medium, :large, :huge, :gargantuan]
+
 end

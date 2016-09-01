@@ -1,5 +1,78 @@
 <h1>All Characters</h1>
+<!-- Rendered via rails
 <p><%= link_to "Create New Character", new_character_path %></p>
 <% @characters.each do |character| %>
    <p><%= link_to character.name, character_path(character.id) %></p>
 <% end %>
+-->
+
+<!-- Creating our form. remote is how we tell rails this is an AJAX request -->
+<%= form_for :character, url: characters_path(:format => :json), remote: true, html: { "class" => "add-character" } do | form | %>
+  <h4>Create a character using AJAX</h5>
+  <%= form.label :name %><br />
+  <%= form.text_field :name, id: "newCharacterName" %>
+  <%= form.submit %>
+<% end %>
+
+<br />
+<br />
+
+<button type="button" id="showCharacters">Fetch All Characters</button>
+
+<br />
+<br />
+
+<!-- Render it with AJAX! -->
+<table class="characters"></table>
+
+<script>
+$(function () {
+// items:
+//  Container that holds all the items.
+  var characters = $(".characters"),
+// newCharacterName:
+//  The input field where the user inputs the new item's name
+    newCharacterName = $("#newCharacterName"),
+// itemTemplate:
+//  Template for the item information.
+    characterTemplate = "<tr class='character'><td>{{name}}</td><td><a href='/characters/{{id}}'>View</a></td></tr>";
+
+  function renderCharacter(/*Object*/ character) {
+// summary:
+//  This will create a table row for an item and add it to the DOM.
+// item: Object
+//  JSON object containing at least an ID and name for the item.
+// NOTE: This isn't necessarily the cleanest solution. Chaining replaces works, but
+// I think realistically, we would use a more complex replace to fish out the token
+// values and replace them with the properties off the item, but this is much simpler
+// to show connectivity.
+    characters.append(characterTemplate.replace("{{name}}", character.name).replace("{{id}}", character.id));
+  }
+
+  function renderCharacters() {
+// summary:
+//  Fetches all items from the server and renders them.
+// NOTE: This will empty the existing table of all contents.
+    characters.empty();
+
+// NOTE: This is an AJAX request  to the server. This is the crux of communication between
+// the server and the client.
+// DEFINE: server is rails, client is JS.
+    $.get("/characters.json").then(function (characters) {
+      characters.forEach(renderCharacter);
+    });
+  }
+
+// Listen for success on the ajax call to add a new item, and log it, render it, and clear out
+// the input, so the user can add another item.
+// NOTE: It's not necessary to clear out the field. I'm only doing so as a slight UI/UX improvement.
+  $(".add-character").on("ajax:success", function (event, character) {
+    console.log("Character Added!", character);
+    renderCharacter(character);
+    newCharacterName.val("");
+  });
+
+// Reuse our renderItems function when the user clicks the Fetch All Items button.
+  $("#showCharacters").on("click", renderCharacters);
+});
+</script>

@@ -2,6 +2,8 @@ class CreateCharacters < ActiveRecord::Migration[5.0]
   def change
     create_table :characters do |t|
       t.string :name
+      t.belongs_to :race, index: true
+      t.belongs_to :hero_class, index: true
       t.integer :level
       t.integer :current_xp
       t.integer :strength

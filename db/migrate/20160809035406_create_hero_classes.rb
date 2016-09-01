@@ -1,7 +1,6 @@
 class CreateHeroClasses < ActiveRecord::Migration[5.0]
   def change
     create_table :hero_classes do |t|
-      t.belongs_to :character, index: true
       t.string :name
       t.integer :hit_dice
       t.boolean :strength_saving_throw_proficiency

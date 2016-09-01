@@ -74,5 +74,13 @@
 <%= f.label :proficiency_bonus, "Proficiency Bonus" %>
 <%= f.number_field :proficiency_bonus, :value => 2 %>
 </br>
+<%= f.label :race_id, "Race" %>
+<%= f.select :race_id, Race.all.collect { |r| [ r.name, r.id ] }, include_blank: true %>
+</br>
+<%= f.label :hero_class_id, "Class" %>
+<%= f.select :hero_class_id, HeroClass.all.collect { |r| [ r.name, r.id ] }, include_blank: true %>
+</br>
    <%= f.submit "Save" %>
  <% end %>
+
+<% console %>

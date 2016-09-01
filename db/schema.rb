@@ -14,6 +14,8 @@ ActiveRecord::Schema.define(version: 20160809035406) do
 
   create_table "characters", force: :cascade do |t|
     t.string   "name"
+    t.integer  "race_id"
+    t.integer  "hero_class_id"
     t.integer  "level"
     t.integer  "current_xp"
     t.integer  "strength"
@@ -33,10 +35,11 @@ ActiveRecord::Schema.define(version: 20160809035406) do
     t.integer  "proficiency_bonus"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.index ["hero_class_id"], name: "index_characters_on_hero_class_id"
+    t.index ["race_id"], name: "index_characters_on_race_id"
   end
 
   create_table "hero_classes", force: :cascade do |t|
-    t.integer  "character_id"
     t.string   "name"
     t.integer  "hit_dice"
     t.boolean  "strength_saving_throw_proficiency"
@@ -47,24 +50,21 @@ ActiveRecord::Schema.define(version: 20160809035406) do
     t.boolean  "charisma_saving_throw_proficiency"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
-    t.index ["character_id"], name: "index_hero_classes_on_character_id"
   end
 
   create_table "races", force: :cascade do |t|
-    t.integer  "character_id"
     t.string   "name"
     t.string   "size"
     t.integer  "speed"
     t.integer  "vision"
     t.integer  "strength_bonus"
     t.integer  "dexterity_bonus"
-    t.integer  "constititon_bonus"
+    t.integer  "constitution_bonus"
     t.integer  "wisdom_bonus"
     t.integer  "intelligence_bonus"
     t.integer  "charisma_bonus"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["character_id"], name: "index_races_on_character_id"
   end
 
 end
