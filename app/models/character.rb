@@ -1,9 +1,10 @@
 class Character < ApplicationRecord
+  SIMPLE_ATTRIBUTES = [:name, :level, :current_xp, :strength, :dexterity, :constitution, :wisdom,
+                       :intelligence, :charisma, :wealth, :height, :weight, :vision, :speed,
+                       :current_hp, :max_hp, :temp_hp, :proficiency_bonus]
   belongs_to :race
   belongs_to :hero_class
 
-  enum race_id: [:no_race, :hill_dwarf, :mountain_dwarf]
-  enum hero_class_id: [:no_hero_class, :barbarian]
   enum vision: [:normal, :darkvision, :superior_darkvision, :truesight, :blind]
 
 

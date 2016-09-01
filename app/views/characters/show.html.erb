@@ -1,17 +1,21 @@
 <h2> <%= @character.name %> </h2>
 
-<% @character.attributes.each do |name, value| %>
-  <% next if name == 'id' || name == 'user_id' || name == 'created_at' || name == 'updated_at' %>
+<p>
+  <strong>Race: </strong>
+  <%= @character.race.name %>
+</p>
+
+<p>
+  <strong>Hero Class: </strong>
+  <%= @character.hero_class.name %>
+</p>
+
+<% Character::SIMPLE_ATTRIBUTES.each do |name| %>
   <p>
-    <strong><%= name.titleize %>: </strong>
-    <% if value.is_a? Integer %>
-        <%= value %>
-    <% else %>
-        <%= value.try(:titleize) %>
-    <% end %>
+    <strong><%= name.to_s.titleize %>: </strong>
+    <%= @character.send(name) %>
   </p>
 <% end %>
-<% console %>
 
 <%= link_to "Edit Character Data", edit_character_path %>
 <%= link_to "Delete Character Data", @character, method: :delete %>
