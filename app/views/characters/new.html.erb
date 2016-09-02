@@ -47,11 +47,11 @@
    <%= f.number_field :wealth, :value => 0 %>
 </br>
    <%= f.radio_button(:vision, "normal") %>
-   <%= f.label :vision, "Normal Vision" %>
+   <%= f.label :vision_normal, "Normal Vision" %>
    <%= f.radio_button(:vision, "darkvision") %>
-   <%= f.label :vision, "Darkvision" %>
+   <%= f.label :vision_darkvision, "Darkvision" %>
    <%= f.radio_button(:vision, "superior_darkvision") %>
-   <%= f.label :vision, "Superior Darkvision" %>
+   <%= f.label :vision_superior_darkvision, "Superior Darkvision" %>
    <!--alternate way to loop through enumerated attributes
    <% Character.visions.keys.each do |vision| %>
       <%= f.radio_button :vision, vision %>
@@ -63,7 +63,7 @@
    <%= f.number_field :speed, :value => 30 %>
 </br>
    <%= f.label :current_hp, "Current HP" %>
-   <%= f.number_field :wealth, :value => 15 %>
+   <%= f.number_field :current_hp, :value => 15 %>
 </br>
    <%= f.label :max_hp, "Max HP" %>
    <%= f.number_field :max_hp, :value => 15 %>
@@ -82,5 +82,3 @@
 </br>
    <%= f.submit "Save" %>
  <% end %>
-
-<% console %>
