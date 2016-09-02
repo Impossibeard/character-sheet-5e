@@ -1,24 +1,17 @@
-# README
+# Character Sheet for 5e:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app is a character generator and sheet for Dungeons and Dragons 5th edition.
 
-Things you may want to cover:
-
-* Ruby version
+* Ruby version > 2.2.2
 
 * System dependencies
+  - Bundler
 
 * Configuration
+  - `bundle install`
 
-* Database creation
-
-* Database initialization
+* Database initialization.
+  - `rake db:reset`
 
 * How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  - `rake spec`
