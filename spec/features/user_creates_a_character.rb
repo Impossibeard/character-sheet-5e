@@ -2,27 +2,8 @@ require 'rails_helper'
 
 feature 'User creates a character' do
   scenario 'they see the character on the page' do
-    hill_dwarf = Race.create!(
-      name: "Hill Dwarf",
-      size: 2,
-      speed: 30,
-      vision: 1,
-      strength_bonus: 0,
-      dexterity_bonus: 0,
-      constitution_bonus: 2,
-      wisdom_bonus: 1,
-      intelligence_bonus: 0,
-      charisma_bonus: 0)
-
-    barbarian = HeroClass.create!(
-      name: "Barbarian",
-      hit_dice: 12,
-      strength_saving_throw_proficiency: true,
-      dexterity_saving_throw_proficiency: false,
-      constitution_saving_throw_proficiency: true,
-      wisdom_saving_throw_proficiency: false,
-      intelligence_saving_throw_proficiency: false,
-      charisma_saving_throw_proficiency: false)
+    create(:race)
+    create(:hero_class)
 
     visit new_character_path
 
