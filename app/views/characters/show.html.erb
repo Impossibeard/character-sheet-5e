@@ -13,7 +13,7 @@
 <% Character::SIMPLE_ATTRIBUTES.each do |name| %>
   <p>
     <strong><%= name.to_s.titleize %>: </strong>
-    <%= @character.send(name) %>
+    <div id='<%= name %>'><%= @character.send(name) %></div>
   </p>
 <% end %>
 
