@@ -15,10 +15,11 @@ class Dice
     number.times do
       @roll_result << @random_number_generator.call(d)
     end
-    @total = 0
+    @roll_total = 0
     @roll_result.each do |t|
-      @total += t
+      @roll_total += t
     end
+    @total = @roll_total
     self
   end
 
@@ -28,6 +29,8 @@ class Dice
   end
 
   def double_dice
+    @total += @roll_total
+    self
   end
 
   def total
@@ -35,6 +38,7 @@ class Dice
   end
 
   def lowest(n=1)
+
   end
 
   def highest(n=1)
