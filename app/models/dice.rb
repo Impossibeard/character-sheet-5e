@@ -38,9 +38,20 @@ class Dice
   end
 
   def lowest(n=1)
-
+    @roll_result.sort!
+    @lowest_roll = []
+    n.times do |i|
+      @lowest_roll << @roll_result[i]
+    end
+    return @lowest_roll
   end
 
   def highest(n=1)
+    @roll_result.sort! {|x, y| y <=> x}
+    @highest_roll = []
+    n.times do |i|
+      @highest_roll << @roll_result[i]
+    end
+    return @highest_roll
   end
 end
