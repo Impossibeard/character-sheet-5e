@@ -1,5 +1,11 @@
 class Dice
   def self.from_string(string, random_number_generator: nil)
+    split_string = string.split("d")
+    dice_amount = split_string[0].to_i
+    dice_faces = split_string[1].to_i
+    plusser = split_string[1].split("+").pop.to_i
+    @dice = Dice.new(random_number_generator: random_number_generator).roll(dice_amount, d: dice_faces).plus(plusser)
+    return @dice
   end
 
   def initialize(random_number_generator: nil)
