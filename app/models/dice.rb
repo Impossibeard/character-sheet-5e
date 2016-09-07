@@ -31,11 +31,13 @@ class Dice
   end
 
   def total
-    total = 0
-    @roll_result.each do |t|
-      total += t
+    if @total == nil
+      @total = 0
+      @roll_result.each do |t|
+        @total += t
+      end
     end
-    return total
+    return @total
   end
 
   def lowest(n=1)
