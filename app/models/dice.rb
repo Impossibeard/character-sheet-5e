@@ -15,14 +15,14 @@ class Dice
     number.times do
       @roll_result << @random_number_generator.call(d)
     end
-    self
-  end
-
-  def plus(number)
     @total = 0
     @roll_result.each do |t|
       @total += t
     end
+    self
+  end
+
+  def plus(number)
     @total += number
     self
   end
@@ -31,12 +31,6 @@ class Dice
   end
 
   def total
-    if @total == nil
-      @total = 0
-      @roll_result.each do |t|
-        @total += t
-      end
-    end
     return @total
   end
 
