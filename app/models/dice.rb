@@ -4,6 +4,7 @@ class Dice
   def self.from_string(string, random_number_generator: nil)
     dice = self.new(random_number_generator: random_number_generator)
 
+    string = string.gsub('-', '+-')
     string.split("+").each do |token|
       if token =~ /d/
         n, d = token.split("d")
