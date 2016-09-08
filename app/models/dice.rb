@@ -1,22 +1,24 @@
 class Dice
   def self.from_string(string, random_number_generator: nil)
-    split_string = string.split("d")
-    dice_amount = split_string[0].to_i
-    dice_faces = split_string[1].to_i
-    if string.include? "+"
-      plusser = split_string[1].split("+").pop.to_i
-      @dice = Dice.new(random_number_generator: random_number_generator).roll(dice_amount, d: dice_faces).plus(plusser)
-    elsif string.include? "-"
-      subtracter = split_string[1].split("-").pop.to_i
-      @dice = Dice.new(random_number_generator: random_number_generator).roll(dice_amount, d: dice_faces).minus(subtracter)
-    else
-      @dice = Dice.new(random_number_generator: random_number_generator).roll(dice_amount, d: dice_faces)
+    dice = self.new(random_number_generator: random_number_generator)
+    string = string.gsub('-', '+-')
+    split_string = string.split("+").each do |segment|
+      if segment =~ /d/
+        dice_amount, dice_faces = segment.split("d")
+        dice.roll(dice_amount.to_i, d: dice_faces.to_i)
+      else
+        dice.plus(segment.to_i)
+      end
     end
-    return @dice
+
+    return dice
   end
 
   def initialize(random_number_generator: nil)
     @random_number_generator = random_number_generator || method(:random_number_generator)
+    @all_rolls = []
+    @all_bonuses = []
+    @dice_multiplier = 1
   end
 
   def random_number_generator(n)
@@ -24,52 +26,31 @@ class Dice
   end
 
   def roll(number, d: 1)
-    @roll_result = []
     number.times do
-      @roll_result << @random_number_generator.call(d)
+      @all_rolls << @random_number_generator.call(d)
     end
-    @roll_total = 0
-    @roll_result.each do |t|
-      @roll_total += t
-    end
-    @total = @roll_total
     self
   end
 
   def plus(number)
-    @total += number
-    self
-  end
-
-  def minus(number)
-    @total -= number
+    @all_bonuses << number.to_i
     self
   end
 
   def double_dice
-    @total += @roll_total
+    @dice_multiplier = 2
     self
   end
 
   def total
-    return @total
+    (@all_rolls.inject(&:+).to_i * @dice_multiplier) + @all_bonuses.inject(&:+).to_i
   end
 
   def lowest(n=1)
-    @roll_result.sort!
-    @lowest_roll = []
-    n.times do |i|
-      @lowest_roll << @roll_result[i]
-    end
-    return @lowest_roll
+    @all_rolls.sort![0..(n-1)]
   end
 
   def highest(n=1)
-    @roll_result.sort! {|x, y| y <=> x}
-    @highest_roll = []
-    n.times do |i|
-      @highest_roll << @roll_result[i]
-    end
-    return @highest_roll
+    @all_rolls.sort!.reverse[0..(n-1)]
   end
 end
