@@ -8,9 +8,14 @@ RSpec.describe Dice do
       expect(Dice.from_string("4d6")).to be_instance_of(Dice)
     end
 
-    it "returns a correct total" do
+    it "returns a correct added total" do
       fake_random_number_function = ->(n) { 1 }
       expect(Dice.from_string("4d6+1", random_number_generator: fake_random_number_function).total).to eq(5)
+    end
+
+    it "returns a correct subtracted total" do
+      fake_random_number_function = ->(n) { 1 }
+      expect(Dice.from_string("3d6-1", random_number_generator: fake_random_number_function).total).to eq(2)
     end
   end
 
@@ -28,6 +33,10 @@ RSpec.describe Dice do
 
     it "#plus" do
       expect(dice.roll(2, d: 6).plus(6).total).to eq(9)
+    end
+
+    it "#minum" do
+      expect(dice.roll(2, d: 6).minus(1).total).to eq(2)
     end
 
     it "#double_dice" do

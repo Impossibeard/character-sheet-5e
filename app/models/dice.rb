@@ -3,8 +3,15 @@ class Dice
     split_string = string.split("d")
     dice_amount = split_string[0].to_i
     dice_faces = split_string[1].to_i
-    plusser = split_string[1].split("+").pop.to_i
-    @dice = Dice.new(random_number_generator: random_number_generator).roll(dice_amount, d: dice_faces).plus(plusser)
+    if string.include? "+"
+      plusser = split_string[1].split("+").pop.to_i
+      @dice = Dice.new(random_number_generator: random_number_generator).roll(dice_amount, d: dice_faces).plus(plusser)
+    elsif string.include? "-"
+      subtracter = split_string[1].split("-").pop.to_i
+      @dice = Dice.new(random_number_generator: random_number_generator).roll(dice_amount, d: dice_faces).minus(subtracter)
+    else
+      @dice = Dice.new(random_number_generator: random_number_generator).roll(dice_amount, d: dice_faces)
+    end
     return @dice
   end
 
@@ -31,6 +38,11 @@ class Dice
 
   def plus(number)
     @total += number
+    self
+  end
+
+  def minus(number)
+    @total -= number
     self
   end
 
