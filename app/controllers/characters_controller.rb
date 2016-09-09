@@ -68,27 +68,6 @@ class CharactersController < ApplicationController
 
   private
   def character_params
-    params.require(:character).permit(:name, :race_id, :hero_class_id, :height, :weight, :level, :current_xp, :strength, :dexterity, :constitution, :wisdom, :intelligence, :charisma, :wealth, :vision, :speed, :current_hp, :max_hp, :temp_hp, :proficiency_bonus)
-  end
-
-  def roll_dice
-    rolls = []
-	  sum = 0
-
-	  # Roll 4 d-6
-	  for i in 0..3
-		    roll = 1 + rand(6)
-
-		    # Sum all the dice
-		    sum += roll
-		    rolls << roll
-	  end
-
-	  # Sort them and remove the lowest number
-	  rolls.sort!
-    # Subtract that from the total
-    sum -= rolls.shift
-
-    sum
+    params.require(:character).permit(:name, :race_id, :hero_class_id, :height, :weight, :level, :current_xp, :base_strength, :base_dexterity, :base_constitution, :base_wisdom, :base_intelligence, :base_charisma, :wealth, :vision, :speed, :current_hp, :max_hp, :temp_hp, :proficiency_bonus)
   end
 end

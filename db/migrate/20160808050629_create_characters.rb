@@ -6,12 +6,12 @@ class CreateCharacters < ActiveRecord::Migration[5.0]
       t.belongs_to :hero_class, index: true
       t.integer :level
       t.integer :current_xp
-      t.integer :strength
-      t.integer :dexterity
-      t.integer :constitution
-      t.integer :wisdom
-      t.integer :intelligence
-      t.integer :charisma
+      t.integer :base_strength
+      t.integer :base_dexterity
+      t.integer :base_constitution
+      t.integer :base_wisdom
+      t.integer :base_intelligence
+      t.integer :base_charisma
       t.integer :wealth
       t.integer :height
       t.integer :weight

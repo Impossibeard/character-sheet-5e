@@ -7,23 +7,27 @@ class Character < ApplicationRecord
 
   enum vision: [:normal, :darkvision, :superior_darkvision, :truesight, :blind]
 
+  def strength
+    base_strength
+  end
 
-  #def total_strength
-    #total_modifications = 0
+  def constitution
+    base_constitution + self.race.constitution_bonus
+  end
 
-    ## model (db) + race modifier + any effect sum
-    #self.strength + self.race.strength_bonus + total_modifications
-  #end
+  def dexterity
+    base_dexterity
+  end
 
+  def wisdom
+    base_wisdom
+  end
+
+  def intelligence
+    base_intelligence
+  end
+
+  def charisma
+    base_charisma
+  end
 end
-
-#
-# character = Character.new(id)
-
-
-# /character/1
-# { name: "whatever", strength: 50 }
-
- # /character/1/add_effect/5
- # /character/character_id/add_effect/effect_id
- # { name: "Whatever", strength: 50 }
