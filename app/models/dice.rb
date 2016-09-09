@@ -1,4 +1,6 @@
 class Dice
+attr_accessor :all_rolls, :all_bonuses
+
   def self.from_string(string, random_number_generator: nil)
     dice = self.new(random_number_generator: random_number_generator)
     string = string.gsub('-', '+-')
@@ -27,13 +29,13 @@ class Dice
 
   def roll(number, d: 1)
     number.times do
-      @all_rolls << @random_number_generator.call(d)
+      all_rolls << @random_number_generator.call(d)
     end
     self
   end
 
   def plus(number)
-    @all_bonuses << number.to_i
+    all_bonuses << number.to_i
     self
   end
 
@@ -43,7 +45,7 @@ class Dice
   end
 
   def total
-    (@all_rolls.inject(&:+).to_i * @dice_multiplier) + @all_bonuses.inject(&:+).to_i
+    (all_rolls.inject(&:+).to_i * @dice_multiplier) + all_bonuses.inject(&:+).to_i
   end
 
   def lowest(n=1)
