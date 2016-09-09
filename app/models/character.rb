@@ -12,7 +12,7 @@ class Character < ApplicationRecord
   end
 
   def constitution
-    base_constitution + self.race.constitution_bonus
+    self.base_constitution + self.race.constitution_bonus
   end
 
   def dexterity
