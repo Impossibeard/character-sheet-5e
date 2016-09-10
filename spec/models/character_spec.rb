@@ -7,6 +7,6 @@ RSpec.describe Character do
   character = Character.create(base_strength: 8, race_id: race.id)
 
   it "returns the modified value of the Strength attribute" do
-    expect(character.strength_modifier).to eq(-1)
+    expect(character.modifier(character.strength)).to eq(-1)
   end
 end
