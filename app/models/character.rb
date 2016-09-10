@@ -1,4 +1,5 @@
 class Character < ApplicationRecord
+
   SIMPLE_ATTRIBUTES = [:name, :level, :current_xp, :strength, :dexterity, :constitution, :wisdom,
                        :intelligence, :charisma, :wealth, :height, :weight, :vision, :speed,
                        :current_hp, :max_hp, :temp_hp, :proficiency_bonus]
@@ -8,26 +9,36 @@ class Character < ApplicationRecord
   enum vision: [:normal, :darkvision, :superior_darkvision, :truesight, :blind]
 
   def strength
-    base_strength
+    self.base_strength + self.race.strength_bonus
   end
 
   def constitution
-    self.base_constitution + self.race.constitution_bonus
+    @constitution = self.base_constitution + self.race.constitution_bonus
   end
 
   def dexterity
-    base_dexterity
+    self.base_dexterity + self.race.dexterity_bonus
   end
 
   def wisdom
-    base_wisdom
+    self.base_wisdom + self.race.wisdom_bonus
   end
 
   def intelligence
-    base_intelligence
+    self.base_intelligence + self.race.intelligence_bonus
   end
 
   def charisma
-    base_charisma
+    self.base_charisma + self.race.charisma_bonus
   end
+
+  def ability_modifier(ability)
+    ((ability / 2.1) - 5).round
+  end
+
+  def constitution_modifier
+    constitution_modifier = ability_modifier(@constitution)
+  end
+
+
 end
