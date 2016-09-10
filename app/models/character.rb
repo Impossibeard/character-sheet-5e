@@ -9,11 +9,11 @@ class Character < ApplicationRecord
   enum vision: [:normal, :darkvision, :superior_darkvision, :truesight, :blind]
 
   def strength
-    self.base_strength + self.race.strength_bonus
+    @strength = self.base_strength + self.race.strength_bonus
   end
 
   def constitution
-    @constitution = self.base_constitution + self.race.constitution_bonus
+    self.base_constitution + self.race.constitution_bonus
   end
 
   def dexterity
@@ -36,8 +36,8 @@ class Character < ApplicationRecord
     ((ability / 2.1) - 5).round
   end
 
-  def constitution_modifier
-    constitution_modifier = ability_modifier(@constitution)
+  def strength_modifier
+    ((@strength / 2.1) - 5).round
   end
 
 
