@@ -1,7 +1,5 @@
 class Character < ApplicationRecord
 
-  attr_accessor :modifier
-
   SIMPLE_ATTRIBUTES = [:name, :level, :current_xp, :strength, :dexterity, :constitution, :wisdom,
                        :intelligence, :charisma, :wealth, :height, :weight, :vision, :speed,
                        :current_hp, :max_hp, :temp_hp, :proficiency_bonus]
@@ -12,11 +10,6 @@ class Character < ApplicationRecord
 
   def strength
     self.base_strength + self.race.strength_bonus
-    
-    # strength = self.base_strength + self.race.strength_bonus
-    # @modifier = ((strength / 2.1) - 5).round
-    #
-    # self
   end
 
   def constitution
@@ -42,10 +35,5 @@ class Character < ApplicationRecord
   def modifier(ability)
     ((ability.to_i / 2.1) - 5).round
   end
-
-  def strength_modifier
-    ((strength / 2.1) - 5).round
-  end
-
 
 end
