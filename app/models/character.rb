@@ -36,4 +36,11 @@ class Character < ApplicationRecord
     ((ability.to_i / 2.1) - 5).round
   end
 
+  def strength_saving_throw(strength)
+    if self.hero_class.strength_saving_throw_proficiency == true
+      self.modifier(strength) + self.proficiency_bonus
+    else
+      self.modifier(strength)
+    end
+  end
 end
