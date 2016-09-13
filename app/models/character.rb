@@ -8,39 +8,26 @@ class Character < ApplicationRecord
 
   enum vision: [:normal, :darkvision, :superior_darkvision, :truesight, :blind]
 
-  def strength
-    self.base_strength + self.race.strength_bonus
+  #Deterines stat totals
+  [:strength, :dexterity, :constitution, :wisdom, :intelligence, :charisma]. each do |ability|
+    define_method ability do
+      send("base_#{ability}") + race.send("#{ability}_bonus")
+    end
   end
 
-  def constitution
-    self.base_constitution + self.race.constitution_bonus
-  end
-
-  def dexterity
-    self.base_dexterity + self.race.dexterity_bonus
-  end
-
-  def wisdom
-    self.base_wisdom + self.race.wisdom_bonus
-  end
-
-  def intelligence
-    self.base_intelligence + self.race.intelligence_bonus
-  end
-
-  def charisma
-    self.base_charisma + self.race.charisma_bonus
-  end
-
+  #Determines ability modifiers for each stat
   def modifier(ability)
     ((ability.to_i / 2.1) - 5).round
   end
 
-  def strength_saving_throw(strength)
-    if self.hero_class.strength_saving_throw_proficiency == true
-      self.modifier(strength) + self.proficiency_bonus
-    else
-      self.modifier(strength)
+  #Handles saving throw checks
+  [:strength_saving_throw, :dexterity_saving_throw, :constitution_saving_throw, :wisdom_saving_throw, :intelligence_saving_throw, :charisma_saving_throw].each do |method_name|
+    define_method method_name do |arg|
+      if hero_class.send("#{method_name}_proficiency") == true
+        modifier(arg) + proficiency_bonus
+      else
+        modifer(arg)
+      end
     end
   end
 end
