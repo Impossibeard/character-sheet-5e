@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809035406) do
+ActiveRecord::Schema.define(version: 20160914032945) do
 
   create_table "characters", force: :cascade do |t|
     t.string   "name"
@@ -65,6 +65,46 @@ ActiveRecord::Schema.define(version: 20160809035406) do
     t.integer  "charisma_bonus"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+  end
+
+  create_table "spellbooks", force: :cascade do |t|
+    t.string   "max_spell_slots"
+    t.string   "integer"
+    t.integer  "available_spell_slots"
+    t.integer  "max_sorcery_points"
+    t.integer  "available_sorcerer_points"
+    t.integer  "spell_save_dc"
+    t.integer  "spell_attack_mod"
+    t.boolean  "ritual_casting"
+    t.boolean  "spell_regen_time"
+    t.integer  "cantrips"
+    t.integer  "character_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["character_id"], name: "index_spellbooks_on_character_id"
+  end
+
+  create_table "spells", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "level"
+    t.string   "school"
+    t.string   "casting_time"
+    t.integer  "range"
+    t.boolean  "touch"
+    t.boolean  "self"
+    t.boolean  "verbal"
+    t.boolean  "somatic"
+    t.string   "material"
+    t.integer  "cost"
+    t.string   "duration"
+    t.boolean  "concentration"
+    t.string   "roll"
+    t.string   "damage_type"
+    t.text     "description"
+    t.integer  "spellbook_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["spellbook_id"], name: "index_spells_on_spellbook_id"
   end
 
 end
