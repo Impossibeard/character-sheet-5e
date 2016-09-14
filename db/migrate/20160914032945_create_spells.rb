@@ -16,6 +16,7 @@ class CreateSpells < ActiveRecord::Migration[5.0]
       t.boolean :concentration
       t.string :roll
       t.string :damage_type
+      t.string :spellcasting_ability
       t.text :description
       t.belongs_to :spellbook
 

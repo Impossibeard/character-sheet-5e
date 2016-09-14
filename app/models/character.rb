@@ -30,4 +30,25 @@ class Character < ApplicationRecord
       end
     end
   end
+
+  def spell_save_dc
+    case hero_class.name
+      when "Cleric", "Druid", "Monk", "Ranger"
+        @total = 8 + proficiency_bonus + modifier(wisdom)
+        puts "Wisdom route"
+        return @total
+      when "Arcane Trickster", "Eldritch Knight", "Wizard"
+        @total = 8 + proficiency_bonus + modifier(intelligence)
+        puts "Intelligence route"
+        return @total
+      when "Bard", "Paladin", "Sorcerer", "Warlock"
+        @total = 8 + proficiency_bonus + modifier(charisma)
+        puts "Charisma route"
+        return @total
+      else
+        @total = 8 + proficiency_bonus + modifier(spell.spellcasting_ability)
+        puts "Exception route: currently not functioning"
+        return @total
+    end
+  end
 end

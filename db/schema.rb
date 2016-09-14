@@ -41,7 +41,8 @@ ActiveRecord::Schema.define(version: 20160914032945) do
 
   create_table "hero_classes", force: :cascade do |t|
     t.string   "name"
-    t.integer  "hit_dice"
+    t.integer  "level"
+    t.string   "hit_dice"
     t.boolean  "strength_saving_throw_proficiency"
     t.boolean  "dexterity_saving_throw_proficiency"
     t.boolean  "constitution_saving_throw_proficiency"
@@ -79,9 +80,11 @@ ActiveRecord::Schema.define(version: 20160914032945) do
     t.boolean  "spell_regen_time"
     t.integer  "cantrips"
     t.integer  "character_id"
+    t.integer  "hero_class_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.index ["character_id"], name: "index_spellbooks_on_character_id"
+    t.index ["hero_class_id"], name: "index_spellbooks_on_hero_class_id"
   end
 
   create_table "spells", force: :cascade do |t|
@@ -100,10 +103,11 @@ ActiveRecord::Schema.define(version: 20160914032945) do
     t.boolean  "concentration"
     t.string   "roll"
     t.string   "damage_type"
+    t.string   "spellcasting_ability"
     t.text     "description"
     t.integer  "spellbook_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.index ["spellbook_id"], name: "index_spells_on_spellbook_id"
   end
 

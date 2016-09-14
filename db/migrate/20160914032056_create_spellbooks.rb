@@ -12,6 +12,7 @@ class CreateSpellbooks < ActiveRecord::Migration[5.0]
       t.boolean :spell_regen_time
       t.integer :cantrips
       t.belongs_to :character
+      t.belongs_to :hero_class
 
       t.timestamps
     end
