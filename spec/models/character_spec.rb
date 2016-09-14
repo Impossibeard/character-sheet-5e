@@ -26,7 +26,7 @@ RSpec.describe Character do
     race = Race.create(wisdom_bonus:1)
     adventurer = Character.create(base_wisdom:12, hero_class_id:cleric.id, race_id:race.id, proficiency_bonus:2)
 
-    expect(adventurer.spell_save_dc).to eq(11)
+    expect(adventurer.spell_save_dc(adventurer.hero_class.name)).to eq(11)
   end
 
   it "calculates spell save dc for Sorcerers" do
@@ -34,7 +34,17 @@ RSpec.describe Character do
     race = Race.create(charisma_bonus:2)
     adventurer = Character.create(base_charisma:14, hero_class_id:sorcerer.id, race_id:race.id, proficiency_bonus:2)
 
-    expect(adventurer.spell_save_dc).to eq(13)
+    expect(adventurer.spell_save_dc(adventurer.hero_class.name)).to eq(13)
+  end
+
+  it "calculates spell save dc for High Elf Cantrip" do
+    sorcerer = HeroClass.create(name:"Sorcerer", level:1, hit_dice:"1d8", constitution_saving_throw_proficiency:true, charisma_saving_throw_proficiency:true)
+    spell = Spell.create(spellcasting_ability: "Intelligence")
+    race = Race.create(charisma_bonus:0, intelligence_bonus:2)
+    adventurer = Character.create(base_charisma:8, base_intelligence:14, hero_class_id:sorcerer.id, race_id:race.id, proficiency_bonus:2)
+
+    expect(adventurer.spell_save_dc(spell.spellcasting_ability)).to eq(13)
+    expect(adventurer.spell_save_dc(adventurer.hero_class.name)).to eq(9)
   end
 
 end

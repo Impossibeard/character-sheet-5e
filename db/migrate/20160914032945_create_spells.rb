@@ -6,8 +6,8 @@ class CreateSpells < ActiveRecord::Migration[5.0]
       t.string :school
       t.string :casting_time
       t.integer :range
-      t.boolean :touch
-      t.boolean :self
+      t.boolean :range_touch
+      t.boolean :range_self
       t.boolean :verbal
       t.boolean :somatic
       t.string :material
