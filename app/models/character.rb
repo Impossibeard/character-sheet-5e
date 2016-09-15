@@ -8,6 +8,13 @@ class Character < ApplicationRecord
 
   enum vision: [:normal, :darkvision, :superior_darkvision, :truesight, :blind]
 
+  def hit_points
+    dice_amount, dice_faces = hero_class.hit_dice.split("d")
+    starting_hp = dice_faces.to_i + modifier(constitution)
+    leveled_hp = ((dice_faces.to_i/2)+ 1 + modifier(constitution)) * (hero_class.level - 1)
+    @max_hp = starting_hp + leveled_hp
+  end
+
   #Deterines stat totals
   [:strength, :dexterity, :constitution, :wisdom, :intelligence, :charisma]. each do |ability|
     define_method ability do

@@ -85,4 +85,13 @@ RSpec.describe Character do
     expect(@tiefling_wizard.spell_save_dc(@tiefling_wizard.hero_class.name)).to eq(13)
   end
 
+  it "calculates characters total hit points at level 1" do
+    expect(@tiefling_wizard.hit_points).to eq(6)
+  end
+
+  it "calculates characters total hit points at level 2" do
+    @tiefling_wizard.hero_class.level += 1
+    expect(@tiefling_wizard.hit_points).to eq(10)
+  end
+
 end
