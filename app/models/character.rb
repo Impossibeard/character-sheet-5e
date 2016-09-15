@@ -26,39 +26,36 @@ class Character < ApplicationRecord
       if hero_class.send("#{method_name}_proficiency") == true
         modifier(arg) + proficiency_bonus
       else
-        modifer(arg)
+        modifier(arg)
       end
     end
   end
 
-  def spell_save_dc(spellcasting_ability)
-    case spellcasting_ability
-      when "Cleric", "Druid", "Monk", "Ranger"
-        @total = 8 + proficiency_bonus + modifier(wisdom)
-        puts "Wisdom route"
-        return @total
-      when "Arcane Trickster", "Eldritch Knight", "Wizard"
-        @total = 8 + proficiency_bonus + modifier(intelligence)
-        puts "Intelligence route"
-        return @total
-      when "Bard", "Paladin", "Sorcerer", "Warlock"
-        @total = 8 + proficiency_bonus + modifier(charisma)
-        puts "Charisma route"
-        return @total
-      when "Strength"
-        8 + proficiency_bonus + modifier(strength)
-      when "Constitution"
-        8 + proficiency_bonus + modifier(constitution)
-      when "Dexterity"
-        8 + proficiency_bonus + modifier(dexterity)
-      when "Wisdom"
-        8 + proficiency_bonus + modifier(wisdom)
-      when "Intelligence"
-        8 + proficiency_bonus + modifier(intelligence)
-      when "Charisma"
-        8 + proficiency_bonus + modifier(charisma)
-      else
-        nil
+  def spell_attack_mod(spellcasting_ability)
+    modifier_value = case spellcasting_ability
+    when "Cleric", "Druid", "Monk", "Ranger"
+      wisdom
+    when "Arcane Trickster", "Eldritch Knight", "Wizard"
+      intelligence
+    when "Bard", "Paladin", "Sorcerer", "Warlock"
+      charisma
+    when "Strength"
+      strength
+    #Deals with spells given directly from the character
+    when "Strength", "Constitution", "Dexterity", "Wisdom", "Intelligence", "Charisma"
+      send(spellcasting_ability.downcase)
+    else
+      nil
     end
+
+    proficiency_bonus + modifier(modifier_value) if modifier_value
+  end
+
+  def spell_save_dc(spellcasting_ability)
+    8 + spell_attack_mod(spellcasting_ability)
+  end
+
+  def vision
+    race.vision
   end
 end

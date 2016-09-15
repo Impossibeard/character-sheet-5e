@@ -15,7 +15,6 @@ class CreateCharacters < ActiveRecord::Migration[5.0]
       t.integer :wealth
       t.integer :height
       t.integer :weight
-      t.integer :vision
       t.integer :speed
       t.integer :current_hp
       t.integer :max_hp

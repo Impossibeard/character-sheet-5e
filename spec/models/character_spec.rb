@@ -3,48 +3,86 @@ require_relative '../../app/models/character'
 
 RSpec.describe Character do
   before(:example) do
-    hero_class = HeroClass.create(strength_saving_throw_proficiency: true)
-    race = Race.create(strength_bonus: 0, constitution_bonus: 2, wisdom_bonus: 1)
-    @character = Character.create(base_strength: 8, race_id: race.id, hero_class_id: hero_class.id, proficiency_bonus: 2)
+    wizard = HeroClass.create(name: "Wizard", level: 1, hit_dice: "1d6", strength_saving_throw_proficiency: false, dexterity_saving_throw_proficiency: false, constitution_saving_throw_proficiency: false, wisdom_saving_throw_proficiency: true, intelligence_saving_throw_proficiency: true, charisma_saving_throw_proficiency: false)
+    tiefling = Race.create(name: "Tiefling", strength_bonus: 0, constitution_bonus: 0, dexterity_bonus: 0, wisdom_bonus: 0, intelligence_bonus: 1, charisma_bonus: 2, vision: 1)
+    @tiefling_wizard = Character.create(base_strength: 8, base_constitution: 10, base_dexterity: 10, base_wisdom: 10, base_intelligence: 15, base_charisma: 12, race_id: tiefling.id, hero_class_id: wizard.id, proficiency_bonus: 2)
   end
 
 
   it "returns the modified value of the Strength attribute" do
-    expect(@character.modifier(@character.strength)).to eq(-1)
+    expect(@tiefling_wizard.modifier(@tiefling_wizard.strength)).to eq(-1)
   end
 
-  it "checks if character is proficient with a saving throw" do
-    expect(@character.hero_class.strength_saving_throw_proficiency).to eq(true)
+  it "returns the modified value of the Constitution attribute" do
+    expect(@tiefling_wizard.modifier(@tiefling_wizard.constitution)).to eq(0)
   end
 
-  it "calculates saving throw modifier for strength" do
-    expect(@character.strength_saving_throw(@character.strength)).to eq(1)
+  it "returns the modified value of the Dexterity attribute" do
+    expect(@tiefling_wizard.modifier(@tiefling_wizard.dexterity)).to eq(0)
   end
 
-  it "calculates spell save dc for Clerics" do
-    cleric = HeroClass.create(name:"Cleric", level:1, hit_dice:"1d10", wisdom_saving_throw_proficiency:true, charisma_saving_throw_proficiency:true)
-    race = Race.create(wisdom_bonus:1)
-    adventurer = Character.create(base_wisdom:12, hero_class_id:cleric.id, race_id:race.id, proficiency_bonus:2)
-
-    expect(adventurer.spell_save_dc(adventurer.hero_class.name)).to eq(11)
+  it "returns the modified value of the Wisdom attribute" do
+    expect(@tiefling_wizard.modifier(@tiefling_wizard.wisdom)).to eq(0)
   end
 
-  it "calculates spell save dc for Sorcerers" do
-    sorcerer = HeroClass.create(name:"Sorcerer", level:1, hit_dice:"1d8", constitution_saving_throw_proficiency:true, charisma_saving_throw_proficiency:true)
-    race = Race.create(charisma_bonus:2)
-    adventurer = Character.create(base_charisma:14, hero_class_id:sorcerer.id, race_id:race.id, proficiency_bonus:2)
-
-    expect(adventurer.spell_save_dc(adventurer.hero_class.name)).to eq(13)
+  it "returns the modified value of the Intelligence attribute" do
+    expect(@tiefling_wizard.modifier(@tiefling_wizard.intelligence)).to eq(3)
   end
 
-  it "calculates spell save dc for High Elf Cantrip" do
-    sorcerer = HeroClass.create(name:"Sorcerer", level:1, hit_dice:"1d8", constitution_saving_throw_proficiency:true, charisma_saving_throw_proficiency:true)
-    spell = Spell.create(spellcasting_ability: "Intelligence")
-    race = Race.create(charisma_bonus:0, intelligence_bonus:2)
-    adventurer = Character.create(base_charisma:8, base_intelligence:14, hero_class_id:sorcerer.id, race_id:race.id, proficiency_bonus:2)
+  it "returns the modified value of the Charisma attribute" do
+    expect(@tiefling_wizard.modifier(@tiefling_wizard.charisma)).to eq(2)
+  end
 
-    expect(adventurer.spell_save_dc(spell.spellcasting_ability)).to eq(13)
-    expect(adventurer.spell_save_dc(adventurer.hero_class.name)).to eq(9)
+  it "checks if character is proficient with a Strength saving throw" do
+    expect(@tiefling_wizard.hero_class.strength_saving_throw_proficiency).to eq(false)
+  end
+
+  it "checks if character is proficient with a Constitution saving throw" do
+    expect(@tiefling_wizard.hero_class.constitution_saving_throw_proficiency).to eq(false)
+  end
+
+  it "checks if character is proficient with a Dexterity saving throw" do
+    expect(@tiefling_wizard.hero_class.dexterity_saving_throw_proficiency).to eq(false)
+  end
+
+  it "checks if character is proficient with a Wisdom saving throw" do
+    expect(@tiefling_wizard.hero_class.wisdom_saving_throw_proficiency).to eq(true)
+  end
+
+  it "checks if character is proficient with a Intelligence saving throw" do
+    expect(@tiefling_wizard.hero_class.intelligence_saving_throw_proficiency).to eq(true)
+  end
+
+  it "checks if character is proficient with a Charisma saving throw" do
+    expect(@tiefling_wizard.hero_class.charisma_saving_throw_proficiency).to eq(false)
+  end
+
+  it "calculates saving throw modifier for Strength" do
+    expect(@tiefling_wizard.strength_saving_throw(@tiefling_wizard.strength)).to eq(-1)
+  end
+
+  it "calculates saving throw modifier for Constitution" do
+    expect(@tiefling_wizard.constitution_saving_throw(@tiefling_wizard.constitution)).to eq(0)
+  end
+
+  it "calculates saving throw modifier for Dexterity" do
+    expect(@tiefling_wizard.dexterity_saving_throw(@tiefling_wizard.dexterity)).to eq(0)
+  end
+
+  it "calculates saving throw modifier for Wisdom" do
+    expect(@tiefling_wizard.wisdom_saving_throw(@tiefling_wizard.wisdom)).to eq(2)
+  end
+
+  it "calculates saving throw modifier for Intelligence" do
+    expect(@tiefling_wizard.intelligence_saving_throw(@tiefling_wizard.intelligence)).to eq(5)
+  end
+
+  it "calculates saving throw modifier for Charisma" do
+    expect(@tiefling_wizard.charisma_saving_throw(@tiefling_wizard.charisma)).to eq(2)
+  end
+
+  it "calculates spell save dc for wizards" do
+    expect(@tiefling_wizard.spell_save_dc(@tiefling_wizard.hero_class.name)).to eq(13)
   end
 
 end

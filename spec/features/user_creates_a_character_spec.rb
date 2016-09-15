@@ -23,7 +23,6 @@ feature 'User creates a character' do
     fill_in 'Max HP', with: '15'
     fill_in 'Temporary HP', with: '0'
     fill_in 'Proficiency Bonus', with: '2'
-    choose 'Normal Vision'
     select 'Hill Dwarf', from: 'Race'
     select 'Barbarian', from: 'Class'
 
@@ -55,7 +54,6 @@ feature 'User creates a character' do
     fill_in 'Max HP', with: '15'
     fill_in 'Temporary HP', with: '0'
     fill_in 'Proficiency Bonus', with: '2'
-    choose 'Normal Vision'
     select 'Hill Dwarf', from: 'Race'
     select 'Barbarian', from: 'Class'
 
