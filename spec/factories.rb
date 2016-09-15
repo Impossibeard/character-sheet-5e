@@ -38,7 +38,6 @@ FactoryGirl.define do
     wealth 0
     height 72
     weight 180
-    vision 1
     speed 30
     current_hp 15
     max_hp 15

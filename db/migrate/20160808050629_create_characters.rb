@@ -19,7 +19,6 @@ class CreateCharacters < ActiveRecord::Migration[5.0]
       t.integer :current_hp
       t.integer :max_hp
       t.integer :temp_hp
-      t.integer :proficiency_bonus
 
       t.timestamps
     end

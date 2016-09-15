@@ -65,4 +65,8 @@ class Character < ApplicationRecord
   def vision
     race.vision
   end
+
+  def proficiency_bonus
+    hero_class.proficiency_bonus
+  end
 end
