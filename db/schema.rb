@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20160914032945) do
     t.integer  "current_hp"
     t.integer  "max_hp"
     t.integer  "temp_hp"
-    t.integer  "proficiency_bonus"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.index ["hero_class_id"], name: "index_characters_on_hero_class_id"
@@ -68,21 +67,11 @@ ActiveRecord::Schema.define(version: 20160914032945) do
   end
 
   create_table "spellbooks", force: :cascade do |t|
-    t.string   "max_spell_slots"
-    t.string   "integer"
-    t.integer  "available_spell_slots"
-    t.integer  "max_sorcery_points"
-    t.integer  "available_sorcerer_points"
-    t.integer  "spell_save_dc"
-    t.integer  "spell_attack_mod"
     t.boolean  "ritual_casting"
-    t.boolean  "spell_regen_time"
-    t.integer  "cantrips"
-    t.integer  "character_id"
+    t.boolean  "short_rest_regen"
     t.integer  "hero_class_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.index ["character_id"], name: "index_spellbooks_on_character_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["hero_class_id"], name: "index_spellbooks_on_hero_class_id"
   end
 
@@ -101,12 +90,14 @@ ActiveRecord::Schema.define(version: 20160914032945) do
     t.string   "duration"
     t.boolean  "concentration"
     t.string   "roll"
+    t.string   "save"
+    t.integer  "save_success"
     t.string   "damage_type"
-    t.string   "spellcasting_ability"
+    t.string   "damage_increase"
     t.text     "description"
     t.integer  "spellbook_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["spellbook_id"], name: "index_spells_on_spellbook_id"
   end
 

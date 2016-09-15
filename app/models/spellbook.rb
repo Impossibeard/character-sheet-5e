@@ -1,8 +1,30 @@
 class Spellbook < ApplicationRecord
   attr_accessor :cantrip, :first_level, :second_level, :third_level, :fourth_level, :fifth_level, :sixth_level, :seventh_level, :eighth_level, :nineth_level
 
+  belongs_to :hero_class
+
+  def cantrips(hero_class)
+    if hero_class.level >= 10
+      5
+    elsif hero_class.level >= 4
+      4
+    else
+      3
+    end
+  end
+
+  def first_level_spell_slots
+    if hero_class.level >= 3
+      4
+    elsif hero_class.level >= 2
+      3
+    else
+      2
+    end
+  end
+
   def known_spells
-    cantrip = 3
+    cantrip = cantrips
     first_level = 6
     second_level = 0
     third_level = 0
@@ -15,7 +37,7 @@ class Spellbook < ApplicationRecord
   end
 
   def spell_slots
-    first_level = 6
+    first_level = first_level_spell_slots
     second_level = 0
     third_level = 0
     fourth_level = 0

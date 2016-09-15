@@ -15,8 +15,10 @@ class CreateSpells < ActiveRecord::Migration[5.0]
       t.string :duration
       t.boolean :concentration
       t.string :roll
+      t.string :save
+      t.integer :save_success
       t.string :damage_type
-      t.string :spellcasting_ability
+      t.string :damage_increase
       t.text :description
       t.belongs_to :spellbook
 
