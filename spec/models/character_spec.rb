@@ -5,28 +5,10 @@ RSpec.describe Character do
   before(:example) do
     wizard = HeroClass.create(name: "Wizard", level: 1, hit_dice: "1d6", strength_saving_throw_proficiency: false, dexterity_saving_throw_proficiency: false, constitution_saving_throw_proficiency: false, wisdom_saving_throw_proficiency: true, intelligence_saving_throw_proficiency: true, charisma_saving_throw_proficiency: false)
     tiefling = Race.create(name: "Tiefling", strength_bonus: 0, constitution_bonus: 0, dexterity_bonus: 0, wisdom_bonus: 0, intelligence_bonus: 1, charisma_bonus: 2, vision: 1)
-    @tiefling_wizard = Character.create(base_strength: 8, base_constitution: 10, base_dexterity: 10, base_wisdom: 10, base_intelligence: 15, base_charisma: 12, race_id: tiefling.id, hero_class_id: wizard.id, proficiency_bonus: 2)
+    @tiefling_wizard = Character.create(base_strength: 8, base_constitution: 10, base_dexterity: 10, base_wisdom: 10, base_intelligence: 15, base_charisma: 12, race_id: tiefling.id, hero_class_id: wizard.id)
     wizard_spellbook = Spellbook.create(ritual_casting: true, short_rest_regen: false)
-    burning_hands = Spell.create(name: "Burning Hands", level: 1, school: "Evocation", casting_time: "action", range: "Self (15 foot cone)", range_touch: false, range_self: true, verbal: true, somatic: true, material: nil, cost: nil, duration: "Instantaneous", concentration: false, roll: "3d6", save: "Dexterity", save_success: 0.5, damage_type: "fire", damage_increase: "1d6 per level", description: "As you hold your hands with thumbs touching and fingers spread, a thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a Dexterity saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one. The fire ignites any flammable objects in the area that aren’t being worn or carried.")
+    burning_hands = Spell.create(name: "Burning Hands", level: 1, school: "Evocation", casting_time: "action", range: "Self (15 foot cone)", range_touch: false, range_self: true, verbal: true, somatic: true, material: nil, cost: nil, duration: "Instantaneous", concentration: false, roll: "3d6", save_check: "Dexterity", save_success: 0.5, damage_type: "fire", damage_increase: "1d6 per level", description: "As you hold your hands with thumbs touching and fingers spread, a thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a Dexterity saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one. The fire ignites any flammable objects in the area that aren’t being worn or carried.")
   end
-
-  t.string :name
-  t.integer :level
-  t.string :school
-  t.string :casting_time
-  t.integer :range
-  t.boolean :range_touch
-  t.boolean :range_self
-  t.boolean :verbal
-  t.boolean :somatic
-  t.string :material
-  t.integer :cost
-  t.string :duration
-  t.boolean :concentration
-  t.string :roll
-  t.string :damage_type
-  t.string :spellcasting_ability
-  t.text :description
 
 
   it "returns the modified value of the Strength attribute" do
@@ -41,12 +23,12 @@ RSpec.describe Character do
     expect(@tiefling_wizard.modifier(@tiefling_wizard.dexterity)).to eq(0)
   end
 
-  it "returns the modified value of the Wisdom attribute" do
-    expect(@tiefling_wizard.modifier(@tiefling_wizard.wisdom)).to eq(0)
-  end
-
   it "returns the modified value of the Intelligence attribute" do
     expect(@tiefling_wizard.modifier(@tiefling_wizard.intelligence)).to eq(3)
+  end
+
+  it "returns the modified value of the Wisdom attribute" do
+    expect(@tiefling_wizard.modifier(@tiefling_wizard.wisdom)).to eq(0)
   end
 
   it "returns the modified value of the Charisma attribute" do
@@ -65,12 +47,12 @@ RSpec.describe Character do
     expect(@tiefling_wizard.hero_class.dexterity_saving_throw_proficiency).to eq(false)
   end
 
-  it "checks if character is proficient with a Wisdom saving throw" do
-    expect(@tiefling_wizard.hero_class.wisdom_saving_throw_proficiency).to eq(true)
-  end
-
   it "checks if character is proficient with a Intelligence saving throw" do
     expect(@tiefling_wizard.hero_class.intelligence_saving_throw_proficiency).to eq(true)
+  end
+
+  it "checks if character is proficient with a Wisdom saving throw" do
+    expect(@tiefling_wizard.hero_class.wisdom_saving_throw_proficiency).to eq(true)
   end
 
   it "checks if character is proficient with a Charisma saving throw" do
@@ -89,16 +71,20 @@ RSpec.describe Character do
     expect(@tiefling_wizard.dexterity_saving_throw(@tiefling_wizard.dexterity)).to eq(0)
   end
 
-  it "calculates saving throw modifier for Wisdom" do
-    expect(@tiefling_wizard.wisdom_saving_throw(@tiefling_wizard.wisdom)).to eq(2)
-  end
-
   it "calculates saving throw modifier for Intelligence" do
     expect(@tiefling_wizard.intelligence_saving_throw(@tiefling_wizard.intelligence)).to eq(5)
   end
 
+  it "calculates saving throw modifier for Wisdom" do
+    expect(@tiefling_wizard.wisdom_saving_throw(@tiefling_wizard.wisdom)).to eq(2)
+  end
+
   it "calculates saving throw modifier for Charisma" do
     expect(@tiefling_wizard.charisma_saving_throw(@tiefling_wizard.charisma)).to eq(2)
+  end
+
+  it "calculates spell attack bonus for wizards" do
+    expect(@tiefling_wizard.spell_attack_mod(@tiefling_wizard.hero_class.name)).to eq(5)
   end
 
   it "calculates spell save dc for wizards" do

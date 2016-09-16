@@ -57,7 +57,25 @@ dexterity_saving_throw_proficiency: false,
 constitution_saving_throw_proficiency: true,
 wisdom_saving_throw_proficiency: false,
 intelligence_saving_throw_proficiency: false,
-charisma_saving_throw_proficiency: false
+charisma_saving_throw_proficiency: false,
+athletics_proficiency: false,
+acrobatics_proficiency: false,
+sleight_of_hand_proficiency: false,
+stealth_proficiency: false,
+arcana_proficiency: false,
+history_proficiency: false,
+investigation_proficiency: false,
+nature_proficiency: false,
+religion_proficiency: false,
+animal_handling_proficiency: false,
+insight_proficiency: false,
+medicine_proficiency: false,
+perception_proficiency: false,
+survival_proficiency: false,
+deception_proficiency: false,
+intimidation_proficiency: false,
+performance_proficiency: false,
+persuasion_proficiency: false
 )
 
 wizard = HeroClass.create!(
@@ -69,7 +87,25 @@ dexterity_saving_throw_proficiency: false,
 constitution_saving_throw_proficiency: false,
 wisdom_saving_throw_proficiency: true,
 intelligence_saving_throw_proficiency: true,
-charisma_saving_throw_proficiency: false
+charisma_saving_throw_proficiency: false,
+athletics_proficiency: false,
+acrobatics_proficiency: false,
+sleight_of_hand_proficiency: false,
+stealth_proficiency: false,
+arcana_proficiency: false,
+history_proficiency: false,
+investigation_proficiency: false,
+nature_proficiency: false,
+religion_proficiency: false,
+animal_handling_proficiency: false,
+insight_proficiency: false,
+medicine_proficiency: false,
+perception_proficiency: false,
+survival_proficiency: false,
+deception_proficiency: false,
+intimidation_proficiency: false,
+performance_proficiency: false,
+persuasion_proficiency: false
 )
 
 puts "Seed finished"

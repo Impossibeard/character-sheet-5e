@@ -1,7 +1,7 @@
 class Character < ApplicationRecord
 
-  SIMPLE_ATTRIBUTES = [:name, :level, :current_xp, :strength, :dexterity, :constitution, :wisdom,
-                       :intelligence, :charisma, :wealth, :height, :weight, :vision, :speed,
+  SIMPLE_ATTRIBUTES = [:name, :level, :current_xp, :strength, :dexterity, :constitution,
+                       :intelligence, :wisdom, :charisma, :wealth, :height, :weight, :vision, :speed,
                        :current_hp, :max_hp, :temp_hp, :proficiency_bonus]
   belongs_to :race
   belongs_to :hero_class
@@ -16,7 +16,7 @@ class Character < ApplicationRecord
   end
 
   #Deterines stat totals
-  [:strength, :dexterity, :constitution, :wisdom, :intelligence, :charisma]. each do |ability|
+  [:strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma]. each do |ability|
     define_method ability do
       send("base_#{ability}") + race.send("#{ability}_bonus")
     end
@@ -27,10 +27,17 @@ class Character < ApplicationRecord
     ((ability.to_i / 2.1) - 5).round
   end
 
-  #Handles saving throw checks
-  [:strength_saving_throw, :dexterity_saving_throw, :constitution_saving_throw, :wisdom_saving_throw, :intelligence_saving_throw, :charisma_saving_throw].each do |method_name|
-    define_method method_name do |arg|
-      if hero_class.send("#{method_name}_proficiency") == true
+  #Deterines stat totals
+  [:strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma]. each do |ability|
+    define_method ability do
+      send("base_#{ability}") + race.send("#{ability}_bonus")
+    end
+  end
+
+  #Deterines Strength skills
+  [:athletics, :strength_saving_throw]. each do |skill|
+    define_method skill do |arg|
+      if hero_class.send("#{skill}_proficiency") == true
         modifier(arg) + proficiency_bonus
       else
         modifier(arg)
@@ -38,28 +45,79 @@ class Character < ApplicationRecord
     end
   end
 
-  def spell_attack_mod(spellcasting_ability)
-    modifier_value = case spellcasting_ability
-    when "Cleric", "Druid", "Monk", "Ranger"
-      wisdom
+  #Deterines Dexterity skills
+  [:acrobatics, :sleight_of_hand, :stealth, :dexterity_saving_throw]. each do |skill|
+    define_method skill do |arg|
+      if hero_class.send("#{skill}_proficiency") == true
+        modifier(arg) + proficiency_bonus
+      else
+        modifier(arg)
+      end
+    end
+  end
+
+  #Deterines Constitution skills
+  def constitution_saving_throw(constitution)
+    if hero_class.constitution_saving_throw_proficiency == true
+      modifier(constitution) + proficiency_bonus
+    else
+      modifier(constitution)
+    end
+  end
+
+  #Deterines Intelligence skills
+  [:arcana, :history, :investigation, :nature, :religion, :intelligence_saving_throw]. each do |skill|
+    define_method skill do |arg|
+      if hero_class.send("#{skill}_proficiency") == true
+        modifier(arg) + proficiency_bonus
+      else
+        modifier(arg)
+      end
+    end
+  end
+
+  #Deterines Wisdom skills
+  [:animal_handling, :insight, :medicine, :perception, :survival, :wisdom_saving_throw]. each do |skill|
+    define_method skill do |arg|
+      if hero_class.send("#{skill}_proficiency") == true
+        modifier(arg) + proficiency_bonus
+      else
+        modifier(arg)
+      end
+    end
+  end
+
+  #Deterines Charisma skills
+  [:deception, :intimidation, :performance, :persuasion, :charisma_saving_throw]. each do |skill|
+    define_method skill do |arg|
+      if hero_class.send("#{skill}_proficiency") == true
+        modifier(arg) + proficiency_bonus
+      else
+        modifier(arg)
+      end
+    end
+  end
+
+  def spell_attack_mod(caster)
+    spellcasting_ability = case caster
     when "Arcane Trickster", "Eldritch Knight", "Wizard"
       intelligence
+    when "Cleric", "Druid", "Monk", "Ranger"
+      wisdom
     when "Bard", "Paladin", "Sorcerer", "Warlock"
       charisma
-    when "Strength"
-      strength
     #Deals with spells given directly from the character
-    when "Strength", "Constitution", "Dexterity", "Wisdom", "Intelligence", "Charisma"
-      send(spellcasting_ability.downcase)
+    when "Strength", "Constitution", "Dexterity", "Intelligence", "Wisdom", "Charisma"
+      send(caster.downcase)
     else
       nil
     end
 
-    proficiency_bonus + modifier(modifier_value) if modifier_value
+    proficiency_bonus + modifier(spellcasting_ability) if spellcasting_ability
   end
 
-  def spell_save_dc(spellcasting_ability)
-    8 + spell_attack_mod(spellcasting_ability)
+  def spell_save_dc(caster)
+    8 + spell_attack_mod(caster)
   end
 
   def vision

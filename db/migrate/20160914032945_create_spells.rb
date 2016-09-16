@@ -15,7 +15,7 @@ class CreateSpells < ActiveRecord::Migration[5.0]
       t.string :duration
       t.boolean :concentration
       t.string :roll
-      t.string :save
+      t.string :save_check
       t.integer :save_success
       t.string :damage_type
       t.string :damage_increase
