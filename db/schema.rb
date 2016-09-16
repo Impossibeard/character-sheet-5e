@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160914032945) do
     t.integer  "wisdom_bonus"
     t.integer  "intelligence_bonus"
     t.integer  "charisma_bonus"
+    t.string   "languages"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end

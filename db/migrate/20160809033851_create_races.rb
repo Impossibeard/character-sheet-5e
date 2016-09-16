@@ -11,6 +11,7 @@ class CreateRaces < ActiveRecord::Migration[5.0]
       t.integer :wisdom_bonus
       t.integer :intelligence_bonus
       t.integer :charisma_bonus
+      t.string :languages
 
       t.timestamps
     end
