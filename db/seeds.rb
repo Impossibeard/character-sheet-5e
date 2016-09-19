@@ -75,7 +75,10 @@ survival_proficiency: false,
 deception_proficiency: false,
 intimidation_proficiency: false,
 performance_proficiency: false,
-persuasion_proficiency: false
+persuasion_proficiency: false,
+tool_proficiencies: nil,
+weapon_proficiencies: "simple weapons, martial weapons",
+armor_proficiencies: "light armor, medium armor, shields"
 )
 
 wizard = HeroClass.create!(
@@ -105,7 +108,10 @@ survival_proficiency: false,
 deception_proficiency: false,
 intimidation_proficiency: false,
 performance_proficiency: false,
-persuasion_proficiency: false
+persuasion_proficiency: false,
+tool_proficiencies: nil,
+weapon_proficiencies: "daggers, darts, slings, quarterstaffs, light crossbows",
+armor_proficiencies: nil
 )
 
 puts "Seed finished"

@@ -28,6 +28,9 @@ class CreateHeroClasses < ActiveRecord::Migration[5.0]
       t.boolean :intimidation_proficiency
       t.boolean :performance_proficiency
       t.boolean :persuasion_proficiency
+      t.string :tool_proficiencies
+      t.string :weapon_proficiencies
+      t.string :armor_proficiencies
       t.timestamps
     end
   end

@@ -15,6 +15,10 @@ class Character < ApplicationRecord
     @max_hp = starting_hp + leveled_hp
   end
 
+  def armor_class
+    modifier(dexterity)
+  end
+
   #Deterines stat totals
   [:strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma]. each do |ability|
     define_method ability do
@@ -126,5 +130,23 @@ class Character < ApplicationRecord
 
   def proficiency_bonus
     hero_class.proficiency_bonus
+  end
+
+  def tool_proficiencies
+    unless hero_class.tool_proficiencies == nil
+      hero_class.tool_proficiencies.gsub(",","").split(" ")
+    end
+  end
+
+  def weapon_proficiencies
+    unless hero_class.weapon_proficiencies == nil
+      hero_class.weapon_proficiencies.gsub(",","").split(" ")
+    end
+  end
+
+  def armor_proficiencies
+    unless hero_class.armor_proficiencies == nil
+      hero_class.armor_proficiencies.gsub(",","").split(" ")
+    end
   end
 end

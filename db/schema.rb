@@ -65,6 +65,9 @@ ActiveRecord::Schema.define(version: 20160914032945) do
     t.boolean  "intimidation_proficiency"
     t.boolean  "performance_proficiency"
     t.boolean  "persuasion_proficiency"
+    t.string   "tool_proficiencies"
+    t.string   "weapon_proficiencies"
+    t.string   "armor_proficiencies"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
