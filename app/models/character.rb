@@ -134,19 +134,26 @@ class Character < ApplicationRecord
 
   def tool_proficiencies
     unless hero_class.tool_proficiencies == nil
-      hero_class.tool_proficiencies.gsub(",","").split(" ")
+      hero_class.tool_proficiencies.split(",").map(&:lstrip)
     end
   end
 
   def weapon_proficiencies
     unless hero_class.weapon_proficiencies == nil
-      hero_class.weapon_proficiencies.gsub(",","").split(" ")
+      hero_class.weapon_proficiencies.split(",").map(&:lstrip)
     end
   end
 
   def armor_proficiencies
     unless hero_class.armor_proficiencies == nil
-      hero_class.armor_proficiencies.gsub(",","").split(" ")
+      hero_class.armor_proficiencies.split(",").map(&:lstrip)
+    end
+  end
+
+  def inventory
+    inventory = []
+    hero_class.starting_equipment.split(",").map(&:lstrip).each do |x|
+      inventory << x
     end
   end
 end

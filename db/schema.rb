@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160914032945) do
     t.string   "tool_proficiencies"
     t.string   "weapon_proficiencies"
     t.string   "armor_proficiencies"
+    t.string   "starting_equipment"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end

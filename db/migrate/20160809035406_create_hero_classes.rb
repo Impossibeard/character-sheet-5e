@@ -31,6 +31,7 @@ class CreateHeroClasses < ActiveRecord::Migration[5.0]
       t.string :tool_proficiencies
       t.string :weapon_proficiencies
       t.string :armor_proficiencies
+      t.string :starting_equipment
       t.timestamps
     end
   end

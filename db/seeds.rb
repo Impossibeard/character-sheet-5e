@@ -78,7 +78,8 @@ performance_proficiency: false,
 persuasion_proficiency: false,
 tool_proficiencies: nil,
 weapon_proficiencies: "simple weapons, martial weapons",
-armor_proficiencies: "light armor, medium armor, shields"
+armor_proficiencies: "light armor, medium armor, shields",
+starting_equipment: "greataxe or any martial melee weapon, two handaxes or any simple weapon, explorer's pack, four javelins"
 )
 
 wizard = HeroClass.create!(
@@ -111,7 +112,8 @@ performance_proficiency: false,
 persuasion_proficiency: false,
 tool_proficiencies: nil,
 weapon_proficiencies: "daggers, darts, slings, quarterstaffs, light crossbows",
-armor_proficiencies: nil
+armor_proficiencies: nil,
+starting_equipment:"quarterstaff or dagger, component pouch or arcane focus, scholar's pack or explorer's pack, spellbook"
 )
 
 puts "Seed finished"
