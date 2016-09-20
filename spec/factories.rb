@@ -1,4 +1,19 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :weapon do
+    name "MyString"
+simple_weapon false
+melee_weapon false
+attack_range 1
+max_attack_range 1
+property "MyString"
+ammunition 1
+cost 1
+damage "MyString"
+damage_type "MyString"
+weight 1
+equipped false
+description "MyText"
+  end
+
   factory :race do
     name "Hill Dwarf"
     size 2

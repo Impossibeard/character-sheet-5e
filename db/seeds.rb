@@ -116,6 +116,88 @@ armor_proficiencies: nil,
 starting_equipment:"quarterstaff or dagger, component pouch or arcane focus, scholar's pack or explorer's pack, spellbook"
 )
 
+quarterstaff = Weapon.create!(
+name: "Quarterstaff"
+simple_weapon: true
+melee_weapon: true
+attack_range: 5
+max_attack_range: 5
+property: "Versatile (1d8)"
+ammunition: nil
+cost: 20
+damage: "1d4"
+damage_type: "bludgeoning"
+weight: 4
+equipped: false
+description: "This weapon can be used with one or two hands. A damage value in parentheses appears with the property-the damage when the weapon is used with two hands to make a melee attack."
+)
+
+light_crossbow = Weapon.create!(
+name: "Light Crossbow"
+simple_weapon: true
+melee_weapon: false
+attack_range: 80
+max_attack_range: 320
+property: "Ammunition, Loading, Two-Handed"
+ammunition: nil
+cost: 2500
+damage: "1d8"
+damage_type: "piercing"
+weight: 5
+equipped: false
+description: "You can use a weapon that has the ammunilion property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack wilh the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or olher container is part of the atlack. At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.
+Because of the time required to load this weapon, you can fire only one piece of ammunition from it when you use an action, bonus action, or reaction to fire it, regardless of the number of attacks you can normally make."
+)
+
+greataxe = Weapon.create!(
+name: "Greataxe"
+simple_weapon: false
+melee_weapon: true
+attack_range: 5
+max_attack_range: 5
+property: "Heavy, Two-Handed"
+ammunition: nil
+cost: 3000
+damage: "1d12"
+damage_type: "slashing"
+weight: 7
+equipped: false
+description: "Small creatures have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it too large for a Small creature to use effectively."
+)
+
+handaxe = Weapon.create!(
+name: "Handaxe"
+simple_weapon: true
+melee_weapon: true
+attack_range: 20
+max_attack_range: 60
+property: "Light, Thrown"
+ammunition: nil
+cost: 500
+damage: "1d6"
+damage_type: "slashing"
+weight: 2
+equipped: false
+description: "A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons.
+If a weapon has the thrown property, you can throw the weapon to make a ranged attack. If the weapon is a melee weapon, you use the same ability modifier for that attack roll and damage roll that you would use for a melee attack with the weapon."
+)
+
+javelin = Weapon.create!(
+name: "Javelin"
+simple_weapon: true
+melee_weapon: true
+attack_range: 30
+max_attack_range: 120
+property: "Thrown"
+ammunition: nil
+cost: 50
+damage: "1d6"
+damage_type: "piercing"
+weight: 2
+equipped: false
+description: "If a weapon has the thrown property, you can throw the weapon to make a ranged attack. If the weapon is a melee weapon, you use the same ability modifier for that attack roll and damage roll that you would use for a melee attack with the weapon."
+)
+
 puts "Seed finished"
 #Race.each do |race|
 #  puts "#{race.name} race created"
@@ -125,3 +207,4 @@ puts "Seed finished"
 #end
 puts "#{Race.count} races created"
 puts "#{HeroClass.count} hero classes created"
+puts "#{Weapon.count} weapons created"

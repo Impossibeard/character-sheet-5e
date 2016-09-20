@@ -45,7 +45,9 @@
 </br>
    <%= f.label :wealth %>
    <%= f.number_field :wealth, :value => 0 %>
-<!-- </br>
+
+<!-- <% if false %>
+  </br>
    <%= f.radio_button(:vision, "normal") %>
    <%= f.label :vision_normal, "Normal Vision" %>
    <%= f.radio_button(:vision, "darkvision") %>
@@ -56,6 +58,7 @@
    <% Character.visions.keys.each do |vision| %>
       <%= f.radio_button :vision, vision %>
       <%= f.label vision.to_sym %>
+   <% end %>
    <% end %>
    -->
 </br>
@@ -80,5 +83,5 @@
 <%= f.label :hero_class_id, "Class" %>
 <%= f.select :hero_class_id, HeroClass.all.collect { |r| [ r.name, r.id ] }, include_blank: true %>
 </br>
-   <%= f.submit "Save" %>
+   <%= f.submit "Create Character" %>
  <% end %>

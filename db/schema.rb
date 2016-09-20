@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914032945) do
+ActiveRecord::Schema.define(version: 20160919020619) do
 
   create_table "characters", force: :cascade do |t|
     t.string   "name"
@@ -122,6 +122,24 @@ ActiveRecord::Schema.define(version: 20160914032945) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["spellbook_id"], name: "index_spells_on_spellbook_id"
+  end
+
+  create_table "weapons", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "simple_weapon"
+    t.boolean  "melee_weapon"
+    t.integer  "attack_range"
+    t.integer  "max_attack_range"
+    t.string   "property"
+    t.integer  "ammunition"
+    t.integer  "cost"
+    t.string   "damage"
+    t.string   "damage_type"
+    t.integer  "weight"
+    t.boolean  "equipped"
+    t.text     "description"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
 end
