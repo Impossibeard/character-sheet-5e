@@ -1,4 +1,14 @@
-FactoryGirl.define do  factory :weapon do
+FactoryGirl.define do  factory :armor do
+    name "MyString"
+type ""
+armor_base 1
+strength_requirement 1
+stealth_disadvantage false
+cost 1
+weight 1
+description "MyText"
+  end
+  factory :weapon do
     name "MyString"
 simple_weapon false
 melee_weapon false
