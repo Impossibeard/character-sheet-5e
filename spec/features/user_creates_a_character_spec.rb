@@ -22,11 +22,10 @@ feature 'User creates a character' do
     fill_in 'Current HP', with: '15'
     fill_in 'Max HP', with: '15'
     fill_in 'Temporary HP', with: '0'
-    fill_in 'Proficiency Bonus', with: '2'
     select 'Hill Dwarf', from: 'Race'
     select 'Barbarian', from: 'Class'
 
-    click_button 'Save'
+    click_button 'Create Character'
 
     expect(page).to have_css '.notice', text: 'Character was saved successfully.'
   end
@@ -53,11 +52,10 @@ feature 'User creates a character' do
     fill_in 'Current HP', with: '15'
     fill_in 'Max HP', with: '15'
     fill_in 'Temporary HP', with: '0'
-    fill_in 'Proficiency Bonus', with: '2'
     select 'Hill Dwarf', from: 'Race'
     select 'Barbarian', from: 'Class'
 
-    click_button 'Save'
+    click_button 'Create Character'
 
     expect(page).to have_css '.notice', text: 'Character was saved successfully.'
     constitution = find(:css, '#constitution')

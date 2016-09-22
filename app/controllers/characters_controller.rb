@@ -68,6 +68,6 @@ class CharactersController < ApplicationController
 
   private
   def character_params
-    params.require(:character).permit(:name, :race_id, :hero_class_id, :height, :weight, :level, :current_xp, :base_strength, :base_dexterity, :base_constitution, :base_wisdom, :base_intelligence, :base_charisma, :wealth, :vision, :speed, :current_hp, :max_hp, :temp_hp, :proficiency_bonus)
+    params.require(:character).permit(:name, :race_id, :hero_class_id, :height, :weight, :level, :current_xp, :base_strength, :base_dexterity, :base_constitution, :base_wisdom, :base_intelligence, :base_charisma, :wealth, :vision, :speed, :current_hp, :max_hp, :temp_hp)
   end
 end

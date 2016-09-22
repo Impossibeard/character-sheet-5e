@@ -8,6 +8,39 @@ class Character < ApplicationRecord
 
   enum vision: [:normal, :darkvision, :superior_darkvision, :truesight, :blind]
 
+  def armor_class
+    ac = 10 + modifier(deterity)
+    if modifier(dexterity) > 2
+      capped_modifier = 2
+    else
+      capped_modifier = modifier(dexterity)
+    end
+    Armor.each do |equipped|
+      if equipped.character_id == id
+        armor_type = equipped.armor_type
+        case armor_type
+        when "Light"
+          ac = equipped.armor_base + modifier(dexterity)
+          puts "Light AC is #{ac}"
+        when "Medium"
+          ac = equipped.armor_base + capped_modifier
+          puts "Medium AC is #{ac}"
+        when "Heavy"
+          ac = equipped.armor_base
+          puts "Heavy AC is #{ac}"
+        when "Shield"
+          ac += equipped.armor_base
+          puts "Shielded AC is #{ac}"
+        else
+          ac
+          puts "Armorless AC is #{ac}"
+        end
+      end
+      puts "Total AC is #{ac}"
+    end
+    return ac
+  end
+
   def hit_points
     dice_amount, dice_faces = hero_class.hit_dice.split("d")
     starting_hp = dice_faces.to_i + modifier(constitution)
@@ -40,29 +73,29 @@ class Character < ApplicationRecord
 
   #Deterines Strength skills
   [:athletics, :strength_saving_throw]. each do |skill|
-    define_method skill do |arg|
-      if hero_class.send("#{skill}_proficiency") == true
-        modifier(arg) + proficiency_bonus
+    define_method skill do
+      if hero_class.send("#{skill}_proficiency")
+        modifier(strength) + proficiency_bonus
       else
-        modifier(arg)
+        modifier(strength)
       end
     end
   end
 
   #Deterines Dexterity skills
   [:acrobatics, :sleight_of_hand, :stealth, :dexterity_saving_throw]. each do |skill|
-    define_method skill do |arg|
-      if hero_class.send("#{skill}_proficiency") == true
-        modifier(arg) + proficiency_bonus
+    define_method skill do
+      if hero_class.send("#{skill}_proficiency")
+        modifier(dexterity) + proficiency_bonus
       else
-        modifier(arg)
+        modifier(dexterity)
       end
     end
   end
 
   #Deterines Constitution skills
-  def constitution_saving_throw(constitution)
-    if hero_class.constitution_saving_throw_proficiency == true
+  def constitution_saving_throw
+    if hero_class.constitution_saving_throw_proficiency
       modifier(constitution) + proficiency_bonus
     else
       modifier(constitution)
@@ -71,33 +104,33 @@ class Character < ApplicationRecord
 
   #Deterines Intelligence skills
   [:arcana, :history, :investigation, :nature, :religion, :intelligence_saving_throw]. each do |skill|
-    define_method skill do |arg|
-      if hero_class.send("#{skill}_proficiency") == true
-        modifier(arg) + proficiency_bonus
+    define_method skill do
+      if hero_class.send("#{skill}_proficiency")
+        modifier(intelligence) + proficiency_bonus
       else
-        modifier(arg)
+        modifier(intelligence)
       end
     end
   end
 
   #Deterines Wisdom skills
   [:animal_handling, :insight, :medicine, :perception, :survival, :wisdom_saving_throw]. each do |skill|
-    define_method skill do |arg|
-      if hero_class.send("#{skill}_proficiency") == true
-        modifier(arg) + proficiency_bonus
+    define_method skill do
+      if hero_class.send("#{skill}_proficiency")
+        modifier(wisdom) + proficiency_bonus
       else
-        modifier(arg)
+        modifier(wisdom)
       end
     end
   end
 
   #Deterines Charisma skills
   [:deception, :intimidation, :performance, :persuasion, :charisma_saving_throw]. each do |skill|
-    define_method skill do |arg|
-      if hero_class.send("#{skill}_proficiency") == true
-        modifier(arg) + proficiency_bonus
+    define_method skill do
+      if hero_class.send("#{skill}_proficiency")
+        modifier(charisma) + proficiency_bonus
       else
-        modifier(arg)
+        modifier(charisma)
       end
     end
   end
@@ -116,7 +149,6 @@ class Character < ApplicationRecord
     else
       nil
     end
-
     proficiency_bonus + modifier(spellcasting_ability) if spellcasting_ability
   end
 

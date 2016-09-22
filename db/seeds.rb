@@ -239,7 +239,7 @@ strength_requirement: nil,
 stealth_disadvantage: false,
 cost: 1000,
 weight: 6,
-description: "Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor. Buckles and straps distribute the weight over the body."
+description: nil
 )
 
 puts "Seed finished"

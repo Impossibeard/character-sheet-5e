@@ -2,7 +2,7 @@ class CreateHeroClasses < ActiveRecord::Migration[5.0]
   def change
     create_table :hero_classes do |t|
       t.string :name
-      t.integer :level
+      t.integer :level, default: 1
       t.string :hit_dice
       t.boolean :strength_saving_throw_proficiency
       t.boolean :dexterity_saving_throw_proficiency

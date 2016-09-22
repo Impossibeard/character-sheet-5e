@@ -21,8 +21,10 @@ ActiveRecord::Schema.define(version: 20160921090317) do
     t.integer  "cost"
     t.integer  "weight"
     t.text     "description"
+    t.integer  "character_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.index ["character_id"], name: "index_armors_on_character_id"
   end
 
   create_table "characters", force: :cascade do |t|
@@ -52,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160921090317) do
 
   create_table "hero_classes", force: :cascade do |t|
     t.string   "name"
-    t.integer  "level"
+    t.integer  "level",                                 default: 1
     t.string   "hit_dice"
     t.boolean  "strength_saving_throw_proficiency"
     t.boolean  "dexterity_saving_throw_proficiency"
@@ -82,8 +84,8 @@ ActiveRecord::Schema.define(version: 20160921090317) do
     t.string   "weapon_proficiencies"
     t.string   "armor_proficiencies"
     t.string   "starting_equipment"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
   end
 
   create_table "races", force: :cascade do |t|
