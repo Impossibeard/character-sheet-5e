@@ -111,6 +111,14 @@ RSpec.describe Character do
     expect(@tiefling_wizard.acrobatics).to eq(0)
   end
 
+  it "checks that all armor is accounted for" do
+    expect(Armor.all.count).to eq(2)
+  end
+
+  it "checks to see if armor is being equipped" do
+    expect(@tiefling_wizard.armors.count).to eq(2)
+  end
+
   it "calculates armor class" do
     expect(@tiefling_wizard.armor_class).to eq(13)
   end
