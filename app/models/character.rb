@@ -11,31 +11,13 @@ class Character < ApplicationRecord
   enum vision: [:normal, :darkvision, :superior_darkvision, :truesight, :blind]
 
   def armor_class
-    ac = 10 + modifier(dexterity)
-    if modifier(dexterity) > 2
-      capped_modifier = 2
+    if armors.blank?
+      ac = 10 + modifier(dexterity)
     else
-      capped_modifier = modifier(dexterity)
-    end
-    armors.each do |equipped|
-      case equipped.armor_type
-      when "Light"
-        ac = equipped.armor_base + capped_modifier
-        puts "Light AC is #{ac}"
-      when "Medium"
-        ac = equipped.armor_base + capped_modifier
-        puts "Medium AC is #{ac}"
-      when "Heavy"
-        ac = equipped.armor_base
-        puts "Heavy AC is #{ac}"
-      when "Shield"
-        ac += equipped.armor_base
-        puts "Shielded AC is #{ac}"
-      else
-        puts "Armorless AC is #{ac}"
+      armors.each do |armor|
+        ac += armor.armor_base(modifier(dexterity))
       end
     end
-    return ac
   end
 
   def hit_points
