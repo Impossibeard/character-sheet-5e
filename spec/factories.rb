@@ -1,4 +1,9 @@
-FactoryGirl.define do  factory :armor do
+FactoryGirl.define do  factory :equipped_item do
+    character nil
+armor nil
+  end
+
+  factory :armor do
     name "MyString"
 type ""
 armor_base 1

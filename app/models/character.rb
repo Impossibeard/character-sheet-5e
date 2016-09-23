@@ -5,22 +5,24 @@ class Character < ApplicationRecord
                        :current_hp, :max_hp, :temp_hp, :proficiency_bonus]
   belongs_to :race
   belongs_to :hero_class
+  has_many :equipped_items
+  has_many :armors, :through => :equipped_items
 
   enum vision: [:normal, :darkvision, :superior_darkvision, :truesight, :blind]
 
   def armor_class
-    ac = 10 + modifier(deterity)
+    ac = 10 + modifier(dexterity)
     if modifier(dexterity) > 2
       capped_modifier = 2
     else
       capped_modifier = modifier(dexterity)
     end
-    Armor.each do |equipped|
+    armors.each do |equipped|
       if equipped.character_id == id
         armor_type = equipped.armor_type
         case armor_type
         when "Light"
-          ac = equipped.armor_base + modifier(dexterity)
+          ac = equipped.armor_base + capped_modifier
           puts "Light AC is #{ac}"
         when "Medium"
           ac = equipped.armor_base + capped_modifier
@@ -46,10 +48,6 @@ class Character < ApplicationRecord
     starting_hp = dice_faces.to_i + modifier(constitution)
     leveled_hp = ((dice_faces.to_i/2)+ 1 + modifier(constitution)) * (hero_class.level - 1)
     @max_hp = starting_hp + leveled_hp
-  end
-
-  def armor_class
-    modifier(dexterity)
   end
 
   #Deterines stat totals

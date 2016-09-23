@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921090317) do
+ActiveRecord::Schema.define(version: 20160923020354) do
 
   create_table "armors", force: :cascade do |t|
     t.string   "name"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 20160921090317) do
     t.datetime "updated_at",        null: false
     t.index ["hero_class_id"], name: "index_characters_on_hero_class_id"
     t.index ["race_id"], name: "index_characters_on_race_id"
+  end
+
+  create_table "equipped_items", force: :cascade do |t|
+    t.integer  "character_id"
+    t.integer  "armor_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["armor_id"], name: "index_equipped_items_on_armor_id"
+    t.index ["character_id"], name: "index_equipped_items_on_character_id"
   end
 
   create_table "hero_classes", force: :cascade do |t|
