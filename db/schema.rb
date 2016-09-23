@@ -21,10 +21,8 @@ ActiveRecord::Schema.define(version: 20160923020354) do
     t.integer  "cost"
     t.integer  "weight"
     t.text     "description"
-    t.integer  "character_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-    t.index ["character_id"], name: "index_armors_on_character_id"
   end
 
   create_table "characters", force: :cascade do |t|

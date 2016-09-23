@@ -18,27 +18,22 @@ class Character < ApplicationRecord
       capped_modifier = modifier(dexterity)
     end
     armors.each do |equipped|
-      if equipped.character_id == id
-        armor_type = equipped.armor_type
-        case armor_type
-        when "Light"
-          ac = equipped.armor_base + capped_modifier
-          puts "Light AC is #{ac}"
-        when "Medium"
-          ac = equipped.armor_base + capped_modifier
-          puts "Medium AC is #{ac}"
-        when "Heavy"
-          ac = equipped.armor_base
-          puts "Heavy AC is #{ac}"
-        when "Shield"
-          ac += equipped.armor_base
-          puts "Shielded AC is #{ac}"
-        else
-          ac
-          puts "Armorless AC is #{ac}"
-        end
+      case equipped.armor_type
+      when "Light"
+        ac = equipped.armor_base + capped_modifier
+        puts "Light AC is #{ac}"
+      when "Medium"
+        ac = equipped.armor_base + capped_modifier
+        puts "Medium AC is #{ac}"
+      when "Heavy"
+        ac = equipped.armor_base
+        puts "Heavy AC is #{ac}"
+      when "Shield"
+        ac += equipped.armor_base
+        puts "Shielded AC is #{ac}"
+      else
+        puts "Armorless AC is #{ac}"
       end
-      puts "Total AC is #{ac}"
     end
     return ac
   end

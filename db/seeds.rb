@@ -206,7 +206,7 @@ strength_requirement: nil,
 stealth_disadvantage: true,
 cost: 500,
 weight: 8,
-description: "Padded armar consists of quilted layers of cloth and batting."
+description: "Padded armor consists of quilted layers of cloth and batting."
 )
 
 breastplate = Armor.create!(

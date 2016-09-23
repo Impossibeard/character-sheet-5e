@@ -9,7 +9,6 @@ class CreateArmors < ActiveRecord::Migration[5.0]
       t.integer :cost
       t.integer :weight
       t.text :description
-      t.belongs_to :character
 
       t.timestamps
     end
